@@ -1,34 +1,27 @@
 package AdminEscuela.Modelo;
 
 public class ModelUsuario {
-    private int Id_Usuario;
-    private String Nombre_Usuario;
-    private String Email;
-    private String Contraseña;
-    private int Id_Rol;
+    private int UsuarioID;
+    private String NombreUsuario;
+    private String Contraseña;    
+    private int RolID;
+    private int EstudianteID;
+    private int ProfesorID;
 
-    public int getId_usuario() {
-        return Id_Usuario;
+    public int getUsuarioID() {
+        return UsuarioID;
     }
 
-    public void setId_usuario(int Id_usuario) {
-        this.Id_Usuario = Id_usuario;
+    public void setUsuarioID(int UsuarioID) {
+        this.UsuarioID = UsuarioID;
     }
 
-    public String getNombres_Usuario() {
-        return Nombre_Usuario;
+    public String getNombreUsuario() {
+        return NombreUsuario;
     }
 
-    public void setNombres_Usuario(String Nombres_Usuario) {
-        this.Nombre_Usuario = Nombres_Usuario;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setNombreUsuario(String NombreUsuario) {
+        this.NombreUsuario = NombreUsuario;
     }
 
     public String getContraseña() {
@@ -39,21 +32,40 @@ public class ModelUsuario {
         this.Contraseña = Contraseña;
     }
 
-    public int getId_Rol() {
-        return Id_Rol;
+    public int getRolID() {
+        return RolID;
     }
 
-    public void setId_Rol(int Id_Rol) {
-        this.Id_Rol = Id_Rol;
+    public void setRolID(int RolID) {
+        this.RolID = RolID;
+    }
+
+    public int getEstudianteID() {
+        return EstudianteID;
+    }
+
+    public void setEstudianteID(int EstudianteID) {
+        this.EstudianteID = EstudianteID;
+    }
+
+    public int getProfesorID() {
+        return ProfesorID;
+    }
+
+    public void setProfesorID(int ProfesorID) {
+        this.ProfesorID = ProfesorID;
+    }
+
+    //Constructor de la clase
+
+    public ModelUsuario(int UsuarioID, String NombreUsuario, String Contraseña, int RolID, int EstudianteID, int ProfesorID) {
+        this.UsuarioID = UsuarioID;
+        this.NombreUsuario = NombreUsuario;
+        this.Contraseña = Contraseña;
+        this.RolID = RolID;
+        this.EstudianteID = EstudianteID;
+        this.ProfesorID = ProfesorID;
     }
     
-    //Constructor de la clase
-    public ModelUsuario(int id,String nombre,String email,String contra,int id_rol){
-        this.Id_Usuario=id;
-        this.Nombre_Usuario=nombre;       
-        this.Email=email;
-        this.Contraseña=contra;
-        this.Id_Rol=id_rol;                        
-    }
     
 }

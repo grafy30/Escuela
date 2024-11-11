@@ -6,16 +6,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
-
 import java.sql.Statement;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class CConexion {
      Connection conectar=null;
     
     String puerto="1433";
-    String bd="Hospital";
-    String usuario="admin";
+    String bd="GestionEscuela";
+    String usuario="admin1";
     String password="1234";
     String ip="localhost";
     
@@ -26,7 +27,7 @@ public class CConexion {
             String cadena="jdbc:sqlserver://"+ip+":"+puerto+";"+"databaseName="+bd+";"+
                        "encrypt=true;trustServerCertificate=true";
             conectar=DriverManager.getConnection(cadena,usuario,password);
-            JOptionPane.showMessageDialog(null, "Conexion exitosa");
+//            JOptionPane.showMessageDialog(null, "Conexion exitosa");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se encontro la conexion"+e);
@@ -42,18 +43,18 @@ public class CConexion {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 ModelUsuario usuario = new ModelUsuario(
-                    rs.getInt("Id_Usuario"),
-                    rs.getString("Nombre_Usuario"),                    
-                    rs.getString("Email"),
+                    rs.getInt("UsuarioID"),
+                    rs.getString("NombreUsuario"),                                        
                     rs.getString("Contraseña"),
-                    rs.getInt("Id_Rol")
+                    rs.getInt("RolID"),
+                    rs.getInt("EstudianteID"),
+                    rs.getInt("ProfesorID")
                 );
-                usuarios.put(usuario.getNombres_Usuario(), usuario);
+                usuarios.put(usuario.getNombreUsuario(), usuario);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return usuarios;
-    }
-    
+    }     
 }

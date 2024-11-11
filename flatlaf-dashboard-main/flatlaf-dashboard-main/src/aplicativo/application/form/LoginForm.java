@@ -1,14 +1,22 @@
 package aplicativo.application.form;
 
+import AdminEscuela.Conexion.CConexion;
+import AdminEscuela.Conexion.SeguridadUtil;
+import AdminEscuela.Conexion.UserSession;
+import AdminEscuela.Modelo.ModelUsuario;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 import aplicativo.application.Application;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class LoginForm extends javax.swing.JPanel {
-
+    
+    private HashMap<String, ModelUsuario> usuarios;
     public LoginForm() {
         initComponents();
         init();
+        cargarUsuariosYadministradores();
     }
 
     private void init() {
@@ -26,7 +34,11 @@ public class LoginForm extends javax.swing.JPanel {
         txtUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "User Name");
         txtPass.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Password");
     }
-
+    private void cargarUsuariosYadministradores() {
+        CConexion conexionPrueba = new CConexion();
+        conexionPrueba.EstablecerConexion();
+        usuarios = conexionPrueba.obtenerUsuarios(); 
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,7 +90,32 @@ public class LoginForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
-        Application.login();
+        String nombreUsuario = txtUser.getText();
+        String contrasena = new String(txtPass.getPassword());
+
+        ModelUsuario usuario = usuarios.get(nombreUsuario); // Buscar el usuario en la tabla de usuarios
+
+//        if (usuario != null && usuario.getContraseña().equals(SeguridadUtil.hashPassword(contrasena))) {
+        if (usuario != null && usuario.getContraseña().equals(contrasena)) {
+            // Credenciales válidas
+            int UsuarioID = usuario.getUsuarioID();
+            String nombre = usuario.getNombreUsuario();
+            int RolID = usuario.getRolID();
+
+            // Guardamos los datos del usuario en la sesión
+            UserSession.getInstancia().setUsuarioID(UsuarioID);
+            UserSession.getInstancia().setNombreUsuario(nombreUsuario);
+            UserSession.getInstancia().setRolId(RolID);
+            
+            System.out.println("Id: " + UsuarioID + " Nombre: " + nombre + " Rol: " + RolID);
+
+            // Llamamos a login sin tener que pasar el rol como argumento
+            Application.login();
+
+        } else {
+            // Credenciales incorrectas
+            JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+        }
     }//GEN-LAST:event_cmdLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

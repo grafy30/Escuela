@@ -16,20 +16,21 @@ public class Table extends JTable {
 
     public Table() {
         setOpaque(false);
-        getTableHeader().setBackground(new Color(255, 255, 255));
-        setBackground(new Color(0, 0, 0, 0));
+//        getTableHeader().setBackground(new Color(255, 255, 255));
+//        setBackground(new Color(0, 0, 0, 0));
         setShowHorizontalLines(true);
-        setGridColor(new Color(30, 30, 30, 50));
-        setRowHeight(40);
+        setShowVerticalLines(true);
+//        setGridColor(new Color(30, 30, 30, 50));
+        setRowHeight(50);
         getTableHeader().setReorderingAllowed(false);       
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
                 TableHeader header = new TableHeader(o + "");
                 header.setHorizontalAlignment(JLabel.CENTER);
-//                if (i1 == 4) {
-//                    header.setHorizontalAlignment(JLabel.CENTER);
-//                }
+                if (i1 == 5) {
+                    header.setHorizontalAlignment(JLabel.CENTER);
+                }
                 return header;
             }
         });
@@ -58,11 +59,8 @@ public class Table extends JTable {
                 } else {
                     Component com = super.getTableCellRendererComponent(jtable, o, selected, focus, i, i1);
                     setBorder(noFocusBorder);
-                    com.setForeground(new Color(0, 0, 0, 0));
                     JLabel label = new JLabel(o + "");
                     label.setHorizontalAlignment(JLabel.CENTER);
-//                    label.setForeground(new Color(102, 102, 102));
-//                    label.setForeground(new Color(0, 0, 0));
                     return label;
                 }
             }

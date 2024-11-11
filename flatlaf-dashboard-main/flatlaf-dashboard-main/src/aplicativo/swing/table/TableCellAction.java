@@ -1,10 +1,11 @@
 package aplicativo.swing.table;
 
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class TableCellAction extends DefaultCellEditor {
 
@@ -17,8 +18,9 @@ public class TableCellAction extends DefaultCellEditor {
     @Override
     public Component getTableCellEditorComponent(JTable jtable, Object o, boolean bln, int i, int i1) {
         data = (ModelAction) o;
-        Action cell = new Action(data);
-        cell.setBackground(new Color(30, 30, 30, 50));
+        Action cell = new Action(data); 
+        cell.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cell.setAlignmentY(Component.CENTER_ALIGNMENT);
         return cell;
     }
 
@@ -26,5 +28,20 @@ public class TableCellAction extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         return data;
+    }
+    
+    public static class CenteredRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            
+            // Aseguramos que el texto esté centrado horizontal y verticalmente
+            if (comp instanceof DefaultTableCellRenderer) {
+                ((DefaultTableCellRenderer) comp).setHorizontalAlignment(SwingConstants.CENTER);
+                ((DefaultTableCellRenderer) comp).setVerticalAlignment(SwingConstants.CENTER);
+            }
+            
+            return comp;
+        }
     }
 }

@@ -78,7 +78,8 @@ public class Message extends javax.swing.JDialog {
 
         lbIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        button2.setText("Ok");
+        button2.setText("OK");
+        button2.setToolTipText("");
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button2ActionPerformed(evt);
