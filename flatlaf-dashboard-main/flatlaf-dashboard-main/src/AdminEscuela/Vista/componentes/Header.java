@@ -1,7 +1,6 @@
 package AdminEscuela.Vista.componentes;
 
 import aplicativo.swing.PanelTransparent;
-import java.awt.event.ActionListener;
 import AdminEscuela.Conexion.UserSession;
 
 public class Header extends PanelTransparent {
@@ -12,23 +11,28 @@ public class Header extends PanelTransparent {
         UserSession user=new UserSession();
         lbUserName.setText(user.getNombreUsuario());
         lbID.setText(String.valueOf(user.getUsuarioID()));
-        if (user.getRolId()==1) {
-            lbRole.setText("Administrador");
-        }else if (user.getRolId()==2) {
-            lbRole.setText("Jefe de Área");
-        }else if (user.getRolId()==3) {
-            lbRole.setText("Profesor");
-        }else if (user.getRolId()==4) {
-            lbRole.setText("Estudiante");
-        }else if (user.getRolId()==5) {
-            lbRole.setText("Recepcionista");
-        }else if (user.getRolId()==6) {
-            lbRole.setText("Padre de Familia");
-        }        
-    }
-
-    public void addMenuEvent(ActionListener event) {
-//        cmdMenu.addActionListener(event);
+        switch (user.getRolId()) {
+            case 1:
+                lbRole.setText("Administrador");
+                break;
+            case 2:
+                lbRole.setText("Jefe de Área");
+                break;
+            case 3:
+                lbRole.setText("Profesor");
+                break;
+            case 4:
+                lbRole.setText("Estudiante");
+                break;
+            case 5:
+                lbRole.setText("Recepcionista");
+                break;
+            case 6:
+                lbRole.setText("Padre de Familia");
+                break;
+            default:
+                lbRole.setText("Rol Desconocido");
+        }    
     }
 
     @SuppressWarnings("unchecked")

@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
 import java.sql.Statement;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
 
 
 public class CConexion {
@@ -48,7 +48,9 @@ public class CConexion {
                     rs.getString("Contraseña"),
                     rs.getInt("RolID"),
                     rs.getInt("EstudianteID"),
-                    rs.getInt("ProfesorID")
+                    rs.getInt("ProfesorID"),
+                    rs.getBytes("Foto"),
+                    rs.getString("Rutafot")
                 );
                 usuarios.put(usuario.getNombreUsuario(), usuario);
             }
