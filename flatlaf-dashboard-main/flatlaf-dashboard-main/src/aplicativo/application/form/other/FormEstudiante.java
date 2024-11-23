@@ -232,14 +232,14 @@ public class FormEstudiante extends javax.swing.JPanel {
                                         .addComponent(lblMostrarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(40, 40, 40)
                                         .addComponent(btnBuscarFoto)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtCorreoEst, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtFotoRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
@@ -250,7 +250,7 @@ public class FormEstudiante extends javax.swing.JPanel {
                                 .addComponent(lblContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(btnAgregarEst)
@@ -258,7 +258,7 @@ public class FormEstudiante extends javax.swing.JPanel {
                         .addComponent(btnEditarEst)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarEst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -332,7 +332,7 @@ public class FormEstudiante extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 1403, Short.MAX_VALUE)
+            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -381,6 +381,7 @@ public class FormEstudiante extends javax.swing.JPanel {
             } catch (Exception e) {
                 estudiante.setFoto(null);
             }
+            estudiante.setRutfo(txtFotoRuta.getText());
             
             // Crear objeto Usuario
             ModelUsuario usuario = new ModelUsuario();
@@ -388,16 +389,7 @@ public class FormEstudiante extends javax.swing.JPanel {
             usuario.setContraseña(new String(txtContraseñaLogin.getText()));
             usuario.setRolID(4); // Asumamos que el rol para estudiante es 3, ajusta según tu base de datos
             usuario.setFoto(estudiante.getFoto()); // Usar la misma foto que el estudiante
-            if (txtFotoRuta.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Seleccione una imagen.");
-                return;
-            }
-            String rutaFoto = txtFotoRuta.getText().trim();
-            usuario.setRuta(rutaFoto); // Asignar la ruta al usuario
-
-            //usuario.setRuta(txtFotoRuta.getText());
-            
-
+         
             // Llamar al método de inserción
             CEstudianteDAO objEstu = new CEstudianteDAO();
             boolean resultado = objEstu.InsertarEstudianteYUsuario(estudiante, usuario);
@@ -409,35 +401,56 @@ public class FormEstudiante extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Error al agregar Estudiante y Usuario.");
             }
-//            CEstudianteDAO objEstu=new CEstudianteDAO();
-//            objEstu.InsertarEstudiante(estudiante);
-//            objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
-//            limpiarcampos();
         }
         
     }//GEN-LAST:event_btnAgregarEstActionPerformed
 
     private void btnEditarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEstActionPerformed
-        //        AutorDAO objAutor=new AutorDAO();
-        //        objAutor.ModificarAutor(txtCodDoc,txtNomDoc, txtAutorApe);
-        //        objAutor.MostrarTablaAutor(JTablaMostrarDoctor);
-        //        txtCodDoc.setText("");
-        //        txtNomDoc.setText("");
-        //        txtAutorApe.setText("");
+        CEstudianteDAO objEstu=new CEstudianteDAO();   
+        objEstu.ModificarEstudiante(txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, jComboBoxSemeEst, txtDireccionEst,
+                txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
+        objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);   
+        limpiarcampos();
     }//GEN-LAST:event_btnEditarEstActionPerformed
 
     private void btnEliminarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEstActionPerformed
-        //        AutorDAO objDis=new AutorDAO();
-        //        objDis.EliminarAutor(txtCodDoc);
-        //        objDis.MostrarTablaAutor(JTablaMostrarDoctor);
-        //        txtCodDoc.setText("");
-        //        txtNomDoc.setText("");
-        //        txtAutorApe.setText("");
+        int filaSeleccionada = JTablaMostrarEstu.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            // Si no hay fila seleccionada, mostrar mensaje de advertencia
+            JOptionPane.showMessageDialog(
+                this, 
+                "Por favor, seleccione un registro de la tabla para eliminar.", 
+                "Advertencia", 
+                JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            // Mostrar mensaje de confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(
+                this, 
+                "¿Está seguro de que desea eliminar este registro?", 
+                "Confirmación de eliminación", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                CEstudianteDAO objEstu=new CEstudianteDAO(); 
+                objEstu.EliminarEstudiante(txtCodigoUsuarioLogin,txtCodEst);
+                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu); 
+                System.out.println("Registro eliminado.");
+            } else {
+                System.out.println("Operación cancelada.");
+                JOptionPane.showMessageDialog(this, "Operación cancelada.");
+            }
+        }                  
+        limpiarcampos();
     }//GEN-LAST:event_btnEliminarEstActionPerformed
 
     private void JTablaMostrarEstuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMostrarEstuMouseClicked
-        CEstudianteDAO objEstu=new CEstudianteDAO();
-        objEstu.SeleccionarEstudiante(JTablaMostrarEstu, txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta);
+        CEstudianteDAO objEstu=new CEstudianteDAO();        
+        objEstu.SeleccionarEstudiante(JTablaMostrarEstu, txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, 
+                jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
         
     }//GEN-LAST:event_JTablaMostrarEstuMouseClicked
 

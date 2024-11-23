@@ -3,6 +3,7 @@ package aplicativo.application.form;
 import AdminEscuela.Conexion.CConexion;
 import AdminEscuela.Conexion.SeguridadUtil;
 import AdminEscuela.Conexion.UserSession;
+import AdminEscuela.Dao.CUsuarioDAO;
 import AdminEscuela.Modelo.ModelUsuario;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
@@ -92,26 +93,29 @@ public class LoginForm extends javax.swing.JPanel {
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
         String nombreUsuario = txtUser.getText();
         String contrasena = new String(txtPass.getPassword());
+         // Crear instancia de CUsuarioDAO
+        CUsuarioDAO usuarioDAO = new CUsuarioDAO();
 
-        ModelUsuario usuario = usuarios.get(nombreUsuario); // Buscar el usuario en la tabla de usuarios
+        // Autenticar usuario
+        ModelUsuario usuario = usuarioDAO.autenticarUsuario(nombreUsuario, contrasena);
 
-//        if (usuario != null && usuario.getContraseña().equals(SeguridadUtil.hashPassword(contrasena))) {
-        if (usuario != null && usuario.getContraseña().equals(contrasena)) {
-            // Credenciales válidas
-            int UsuarioID = usuario.getUsuarioID();
-            String nombre = usuario.getNombreUsuario();
-            int RolID = usuario.getRolID();
-
-            // Guardamos los datos del usuario en la sesión
-            UserSession.getInstancia().setUsuarioID(UsuarioID);
-            UserSession.getInstancia().setNombreUsuario(nombreUsuario);
-            UserSession.getInstancia().setRolId(RolID);
+        if (usuario != null) {
             
-            System.out.println("Id: " + UsuarioID + " Nombre: " + nombre + " Rol: " + RolID);
+            UserSession session = UserSession.getInstancia();
+            System.out.println("Usuario en sesión: " + session.getNombreCompleto());
+            session.getUsuarioID();
+            session.getNombreUsuario();
+            session.getRolId();
+            session.getFoto();
+            session.getNombreCompleto();
+                
+            System.out.println("ID: " + session.getUsuarioID() + 
+                               " Codigo: " + session.getNombreUsuario() +
+                               " Nombre: " + session.getNombreCompleto() + 
+                               " Rol: " + session.getRolId());
 
-            // Llamamos a login sin tener que pasar el rol como argumento
+            // Llamar a la aplicación
             Application.login();
-
         } else {
             // Credenciales incorrectas
             JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");

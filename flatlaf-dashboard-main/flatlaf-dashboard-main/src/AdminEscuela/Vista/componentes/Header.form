@@ -21,7 +21,11 @@
               <Component id="lbUserName1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbID" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="220" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="lbUserName2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lbCodUser" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="96" max="32767" attributes="0"/>
               <Component id="buttonBadges1" min="-2" pref="56" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonBadges2" min="-2" pref="56" max="-2" attributes="0"/>
@@ -29,17 +33,17 @@
               <Component id="jSeparator1" min="-2" pref="8" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbUserName3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbUserName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="lbRole" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblNombUser" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="imageAvatar1" min="-2" pref="39" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -52,8 +56,8 @@
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbUserName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbUserName3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNombUser" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbRole" min="-2" max="-2" attributes="0"/>
@@ -73,6 +77,8 @@
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="lbUserName1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbUserName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbCodUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -84,9 +90,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lbUserName">
+    <Component class="javax.swing.JLabel" name="lbCodUser">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User Name"/>
+        <Property name="text" type="java.lang.String" value="CodUser"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbRole">
@@ -142,6 +148,16 @@
     <Component class="javax.swing.JLabel" name="lbUserName3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hola,"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbUserName2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cod:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNombUser">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NombreUser"/>
       </Properties>
     </Component>
   </SubComponents>

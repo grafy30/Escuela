@@ -8,6 +8,9 @@ public class UserSession {
     private static int UsuarioID;
     private static String NombreUsuario;
     private static int RolId;
+    private static byte[] Foto; 
+    private static String NombreCompleto; // Nombre completo del estudiante o profesor
+
 
     public static UserSession getInstancia() {
         if (instancia==null) {
@@ -42,6 +45,22 @@ public class UserSession {
 
     public static void setRolId(int RolId) {
         UserSession.RolId = RolId;
+    }
+
+    public static byte[] getFoto() {
+        return Foto;
+    }
+
+    public static void setFoto(byte[] Foto) {
+        UserSession.Foto = Foto;
+    }
+
+    public static String getNombreCompleto() {
+        return NombreCompleto;
+    }
+
+    public static void setNombreCompleto(String NombreCompleto) {
+        UserSession.NombreCompleto = NombreCompleto;
     }
     
     public void clearSession(){

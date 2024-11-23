@@ -2,6 +2,12 @@ package AdminEscuela.Vista.componentes;
 
 import aplicativo.swing.PanelTransparent;
 import AdminEscuela.Conexion.UserSession;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Header extends PanelTransparent {
 
@@ -9,8 +15,10 @@ public class Header extends PanelTransparent {
         initComponents();
         setTransparent(0.5f);
         UserSession user=new UserSession();
-        lbUserName.setText(user.getNombreUsuario());
+//        UserSession user = UserSession.getInstancia();
+        lbCodUser.setText(user.getNombreUsuario());
         lbID.setText(String.valueOf(user.getUsuarioID()));
+        lblNombUser.setText(user.getNombreCompleto());
         switch (user.getRolId()) {
             case 1:
                 lbRole.setText("Administrador");
@@ -32,14 +40,50 @@ public class Header extends PanelTransparent {
                 break;
             default:
                 lbRole.setText("Rol Desconocido");
-        }    
+        }
+         
+        byte[] fotoBytes = user.getFoto();
+        int anchoFijo = 39; // Ancho fijo de la imagen
+        int altoFijo = 39;  // Alto fijo de la imagen
+
+        if (fotoBytes != null && fotoBytes.length > 0) {
+            try {
+                // Convertir los bytes en un BufferedImage
+                ByteArrayInputStream bis = new ByteArrayInputStream(fotoBytes);
+                BufferedImage bufferedImage = ImageIO.read(bis);
+
+                // Escalar la imagen al tamaño fijo
+                if (bufferedImage != null) {
+                    Image imgEscalada = bufferedImage.getScaledInstance(
+                        anchoFijo,
+                        altoFijo,
+                        Image.SCALE_SMOOTH
+                    );
+                    imageAvatar1.setIcon(new ImageIcon(imgEscalada));
+                } else {
+                    System.err.println("No se pudo convertir la imagen recuperada.");
+                }
+            } catch (IOException e) {
+                System.err.println("Error al procesar la imagen: " + e.getMessage());
+            }
+        } else {
+            // Imagen predeterminada si no hay datos en la base de datos
+            ImageIcon icono = new ImageIcon("src/aplicativo/icon/jpg/foto_fondo.jpg");
+            Image imgEscalada = icono.getImage().getScaledInstance(
+                anchoFijo,
+                altoFijo,
+                Image.SCALE_SMOOTH
+            );
+            imageAvatar1.setIcon(new ImageIcon(imgEscalada));
+        }
     }
 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbUserName = new javax.swing.JLabel();
+        lbCodUser = new javax.swing.JLabel();
         lbRole = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         buttonBadges1 = new aplicativo.swing.ButtonBadges();
@@ -48,8 +92,10 @@ public class Header extends PanelTransparent {
         lbUserName1 = new javax.swing.JLabel();
         lbID = new javax.swing.JLabel();
         lbUserName3 = new javax.swing.JLabel();
+        lbUserName2 = new javax.swing.JLabel();
+        lblNombUser = new javax.swing.JLabel();
 
-        lbUserName.setText("User Name");
+        lbCodUser.setText("CodUser");
 
         lbRole.setText("Admin");
 
@@ -70,6 +116,10 @@ public class Header extends PanelTransparent {
 
         lbUserName3.setText("Hola,");
 
+        lbUserName2.setText("Cod:");
+
+        lblNombUser.setText("NombreUser");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +129,11 @@ public class Header extends PanelTransparent {
                 .addComponent(lbUserName1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(lbUserName2)
+                .addGap(18, 18, 18)
+                .addComponent(lbCodUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,14 +141,14 @@ public class Header extends PanelTransparent {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbUserName3)
-                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbUserName)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbRole)
-                        .addGap(26, 26, 26)))
+                        .addGap(40, 40, 40)
+                        .addComponent(lbRole))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNombUser)))
+                .addGap(26, 26, 26)
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -105,8 +159,8 @@ public class Header extends PanelTransparent {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbUserName)
-                            .addComponent(lbUserName3))
+                            .addComponent(lbUserName3)
+                            .addComponent(lblNombUser))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbRole))
                     .addComponent(imageAvatar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,7 +175,9 @@ public class Header extends PanelTransparent {
                             .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lbUserName1)
-                                .addComponent(lbID))))
+                                .addComponent(lbID)
+                                .addComponent(lbUserName2)
+                                .addComponent(lbCodUser))))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -132,10 +188,12 @@ public class Header extends PanelTransparent {
     private aplicativo.swing.ButtonBadges buttonBadges2;
     private aplicativo.swing.ImageAvatar imageAvatar1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbCodUser;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbRole;
-    private javax.swing.JLabel lbUserName;
     private javax.swing.JLabel lbUserName1;
+    private javax.swing.JLabel lbUserName2;
     private javax.swing.JLabel lbUserName3;
+    private javax.swing.JLabel lblNombUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,8 +7,8 @@ public class ModelUsuario {
     private int RolID;
     private int EstudianteID;
     private int ProfesorID;
-    private byte [] Foto;
-    private String Ruta;
+    private byte [] Foto;    
+    private String NombreCompleto;
 
     public ModelUsuario() {
     }       
@@ -69,23 +69,23 @@ public class ModelUsuario {
         this.Foto = Foto;
     }
 
-    public String getRuta() {
-        return Ruta;
+    public String getNombreCompleto() {
+        return NombreCompleto;
     }
 
-    public void setRuta(String Ruta) {
-        this.Ruta = Ruta;
+    public void setNombreCompleto(String NombreCompleto) {
+        this.NombreCompleto = NombreCompleto;
     }
-
-    //Constructor de la clase
-    public ModelUsuario(int UsuarioID, String NombreUsuario, String Contraseña, int RolID, int EstudianteID, int ProfesorID, byte[] Foto, String Ruta) {
+        
+    //Constructor de la clase      
+    public ModelUsuario(int UsuarioID, String NombreUsuario, String Contraseña, int RolID, byte[] Foto, int EstudianteID, int ProfesorID, String NombreCompleto) {
         this.UsuarioID = UsuarioID;
         this.NombreUsuario = NombreUsuario;
         this.Contraseña = Contraseña;
         this.RolID = RolID;
+        this.Foto = Foto;
         this.EstudianteID = EstudianteID;
         this.ProfesorID = ProfesorID;
-        this.Foto = Foto;
-        this.Ruta = Ruta;
-    }            
+        this.NombreCompleto = NombreCompleto;
+    }   
 }

@@ -16,6 +16,7 @@ public class ModelEstudiante {
     private String Email;
     private Date FechaRegistro;
     private byte [] Foto;
+    private String Rutfo;
 
     public ModelEstudiante() {
     }
@@ -112,7 +113,15 @@ public class ModelEstudiante {
         this.Foto = Foto;
     }
 
-    public ModelEstudiante(int EstudianteID, String Nombre, String Apellido, Date FechaNacimiento, String Dni, String Grado, String Direccion, String Telefono, String Email, Date FechaRegistro, byte[] Foto) {
+    public String getRutfo() {
+        return Rutfo;
+    }
+
+    public void setRutfo(String Rutfo) {
+        this.Rutfo = Rutfo;
+    }
+
+    public ModelEstudiante(int EstudianteID, String Nombre, String Apellido, Date FechaNacimiento, String Dni, String Grado, String Direccion, String Telefono, String Email, Date FechaRegistro, byte[] Foto, String Rutfo) {
         this.EstudianteID = EstudianteID;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -124,5 +133,8 @@ public class ModelEstudiante {
         this.Email = Email;
         this.FechaRegistro = FechaRegistro;
         this.Foto = Foto;
-    }                
+        this.Rutfo = Rutfo;
+    }
+
+              
 }

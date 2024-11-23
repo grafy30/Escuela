@@ -5,6 +5,8 @@ import AdminEscuela.Modelo.ModelEstudiante;
 import AdminEscuela.Modelo.ModelUsuario;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,7 +25,7 @@ public class CEstudianteDAO {
 
     public void SeleccionarEstudiante(JTable tabla, JTextField txtCodEst, JTextField txtNomEst, JTextField txtApellidosEst, JDateChooser jFechaNa, 
                                       JTextField txtDNIEst, JComboBox <String> jComboBoxSemeEst, JTextField txtDireccionEst, JTextField txtTelefonoEst,
-                                      JTextField txtCorreoEst, JLabel lblMostrarFoto,JTextField ruta) {
+                                      JTextField txtCorreoEst, JLabel lblMostrarFoto,JTextField ruta,JTextField codUser,JTextField PassUser) {
                                       
         try {
             int fila = tabla.getSelectedRow();
@@ -62,12 +64,11 @@ public class CEstudianteDAO {
                     ImageIcon icono = new ImageIcon("src/aplicativo/icon/jpg/foto_fondo.jpg");
                     lblMostrarFoto.setIcon(icono);
                 }
-                if (ruta.getText().isEmpty()) {
-                    ruta.setText("");
-//                    JOptionPane.showMessageDialog(null, "Seleccione una imagen.");
-                    return;
-                }
-//                String rutaFoto = ruta.getText().trim();
+               ruta.setText(tabla.getValueAt(fila, 11).toString());
+
+                 // Datos de la tabla Usuario
+                codUser.setText(tabla.getValueAt(fila, 12).toString());
+                PassUser.setText(tabla.getValueAt(fila, 13).toString());
             }
         }
         catch (Exception e) {
@@ -98,7 +99,7 @@ public class CEstudianteDAO {
 
         // Consulta SQL corregida
         String sql = "SELECT e.EstudianteID, e.Nombre, e.Apellido, e.FechaNacimiento, e.Dni, e.Grado, e.Direccion, "
-                   + "e.Telefono, e.Email, e.FechaRegistro, e.Foto, u.RutaFot, u.NombreUsuario, u.Contraseña "
+                   + "e.Telefono, e.Email, e.FechaRegistro, e.Foto, e.RutaFot, u.NombreUsuario, u.Contraseña "
                    + "FROM Estudiantes e "
                    + "LEFT JOIN Usuarios u ON e.EstudianteID = u.EstudianteID";
 
@@ -133,10 +134,10 @@ public class CEstudianteDAO {
 
     public boolean InsertarEstudianteYUsuario(ModelEstudiante estudiante, ModelUsuario usuario) {
         CConexion objCon = new CConexion();
-        String sqlEstudiante = "INSERT INTO Estudiantes (Nombre, Apellido, FechaNacimiento, Dni, Grado, Direccion, Telefono, Email, FechaRegistro, Foto) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), ?)";
-        String sqlUsuario = "INSERT INTO Usuarios (NombreUsuario, Contraseña, RolID, EstudianteID, Foto, RutaFot) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sqlEstudiante = "INSERT INTO Estudiantes (Nombre, Apellido, FechaNacimiento, Dni, Grado, Direccion, Telefono, Email, FechaRegistro, Foto, RutaFot)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), ?, ?)";
+        String sqlUsuario = "INSERT INTO Usuarios (NombreUsuario, Contraseña, RolID, EstudianteID, Foto) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = objCon.EstablecerConexion()) {
             conn.setAutoCommit(false);
@@ -152,6 +153,7 @@ public class CEstudianteDAO {
                 pstEst.setString(7, estudiante.getTelefono());
                 pstEst.setString(8, estudiante.getEmail());
                 pstEst.setBytes(9, estudiante.getFoto());
+                pstEst.setString(10, estudiante.getRutfo());
                 pstEst.executeUpdate();
 
                 // Obtener el ID del Estudiante
@@ -167,8 +169,7 @@ public class CEstudianteDAO {
                     pstUsu.setString(2, usuario.getContraseña());
                     pstUsu.setInt(3, usuario.getRolID());
                     pstUsu.setInt(4, estudianteID);
-                    pstUsu.setBytes(5, usuario.getFoto());
-                    pstUsu.setString(6, usuario.getRuta());
+                    pstUsu.setBytes(5, usuario.getFoto());                    
                     pstUsu.executeUpdate();
                 }
 
@@ -186,38 +187,94 @@ public class CEstudianteDAO {
         }
     }
 
-    
-//    public void InsertarEstudiante(ModelEstudiante estudiante) {
-//        CConexion objCon = new CConexion(); 
-//        String sql = "INSERT INTO Estudiantes(Nombre, Apellido, FechaNacimiento, Dni, Grado, Direccion, Telefono, Email, Foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        
-//        try (Connection con = objCon.EstablecerConexion(); // Obtener conexión
-//             PreparedStatement pst = con.prepareStatement(sql)) {
-//             
-//            // Asignar los valores del objeto ModelEstudiante al PreparedStatement
-//            pst.setString(1, estudiante.getNombre());
-//            pst.setString(2, estudiante.getApellido());
-//            pst.setDate(3, new java.sql.Date(estudiante.getFechaNacimiento().getTime())); // Convertir java.util.Date a java.sql.Date
-//            pst.setString(4, estudiante.getDni());
-//            pst.setString(5, estudiante.getGrado());
-//            pst.setString(6, estudiante.getDireccion());
-//            pst.setString(7, estudiante.getTelefono());
-//            pst.setString(8, estudiante.getEmail());
-//            
-//            // Manejar la imagen del estudiante (puede ser null)
-//            if (estudiante.getFoto() != null) {
-//                pst.setBytes(9, estudiante.getFoto());
-//            } else {
-//                pst.setNull(9, java.sql.Types.BLOB); // Si no hay imagen, insertar null
-//            }            
-//            // Ejecutar la consulta
-//            int filasInsertadas = pst.executeUpdate();
-//            
-//            if (filasInsertadas > 0) {
-//                JOptionPane.showMessageDialog(null, "Estudiante agregado exitosamente.");
-//            }            
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Error al insertar estudiante: " + e.getMessage());
-//        }
-//    }    
+    public void ModificarEstudiante(JTextField txtCodEst, JTextField txtNomEst, JTextField txtApellidosEst, JDateChooser jFechaNa, JTextField txtDNIEst,
+            JComboBox<String> jComboBoxSemeEst, JTextField txtDireccionEst, JTextField txtTelefonoEst, JTextField txtCorreoEst, JLabel lblMostrarFoto, 
+            JTextField txtFotoRuta, JTextField txtUsuarioLogin, JTextField txtContraseñaLogin) {
+        
+        Connection con = null;
+        CallableStatement cs = null;
+        CConexion objCon = new CConexion();
+        try {                      
+            String sql = "UPDATE Estudiantes SET Nombre = ?, Apellido = ?, FechaNacimiento = ?, Dni = ?, Grado = ?, Direccion = ?, Telefono = ?, Email = ?, Foto = ? " +
+                         "WHERE EstudianteID = ?";
+            cs=objCon.EstablecerConexion().prepareCall(sql);
+//            pst = objCon.prepareStatement(sql);
+
+            cs.setString(1, txtNomEst.getText());
+            cs.setString(2, txtApellidosEst.getText());
+
+            // Convertir la fecha de JDateChooser a un tipo de dato SQL
+            java.util.Date fecha = jFechaNa.getDate();
+            java.sql.Date fechaSQL = (fecha != null) ? new java.sql.Date(fecha.getTime()) : null;
+            cs.setDate(3, fechaSQL);
+
+            cs.setString(4, txtDNIEst.getText());
+            cs.setString(5, jComboBoxSemeEst.getSelectedItem().toString());
+            cs.setString(6, txtDireccionEst.getText());
+            cs.setString(7, txtTelefonoEst.getText());
+            cs.setString(8, txtCorreoEst.getText());
+
+            // Cargar la foto desde el archivo seleccionado, si existe
+            if (!txtFotoRuta.getText().isEmpty()) {
+                FileInputStream fis = new FileInputStream(txtFotoRuta.getText());
+                cs.setBinaryStream(9, fis, (int) new File(txtFotoRuta.getText()).length());
+            } else {
+                cs.setNull(9, java.sql.Types.BLOB);
+            }
+
+            cs.setInt(10, Integer.parseInt(txtCodEst.getText())); // ID del estudiante
+
+            // Ejecutar la consulta
+            int rowsUpdated = cs.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "¡Datos del estudiante modificados exitosamente!");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar los datos del estudiante. Verifica el ID.");
+            }
+
+            // Actualizar también los datos del usuario si es necesario
+            String sqlUsuario = "UPDATE Usuarios SET Contraseña = ? WHERE NombreUsuario = ?";
+            cs=objCon.EstablecerConexion().prepareCall(sqlUsuario);
+            cs.setString(1, txtContraseñaLogin.getText());
+            cs.setString(2,txtUsuarioLogin.getText()); // ID del estudiante
+
+            rowsUpdated = cs.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "¡Datos del usuario modificados exitosamente!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el estudiante: " + e.getMessage());
+        } finally {
+            try {
+                if (cs != null) cs.close();
+                if (con != null) con.close();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void EliminarEstudiante(JTextField txtCodUser,JTextField txtCodEstu) {
+        CConexion objc=new CConexion();
+        
+        String query= "DELETE FROM Usuarios WHERE Usuarios.NombreUsuario=?";       
+        String query2= "DELETE FROM Estudiantes WHERE Estudiantes.EstudianteID=?";
+        System.out.println("Codigo Usuario: "+ txtCodUser.getText());
+        try {            
+            CallableStatement cs=objc.EstablecerConexion().prepareCall(query);
+            cs.setString(1, txtCodUser.getText());
+            cs.executeUpdate();
+            JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO");
+            
+            cs=objc.EstablecerConexion().prepareCall(query2);
+            cs.setInt(1,Integer.parseInt(txtCodEstu.getText()));
+            cs.executeUpdate();
+            JOptionPane.showMessageDialog(null, "ESTUDIANTE ELIMINADO");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar eliminar"+e.toString());
+        }  
+    }
+
 }
