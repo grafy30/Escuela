@@ -2,6 +2,7 @@ package AdminEscuela.Vista.componentes;
 
 import aplicativo.swing.PanelTransparent;
 import AdminEscuela.Conexion.UserSession;
+import AdminEscuela.Modelo.ModelUsuario;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -13,7 +14,7 @@ public class Header extends PanelTransparent {
 
     public Header() {
         initComponents();
-        setTransparent(0.5f);
+        setTransparent(0.5f);              
         UserSession user=new UserSession();
 //        UserSession user = UserSession.getInstancia();
         lbCodUser.setText(user.getNombreUsuario());
@@ -24,10 +25,10 @@ public class Header extends PanelTransparent {
                 lbRole.setText("Administrador");
                 break;
             case 2:
-                lbRole.setText("Jefe de Área");
+                lbRole.setText("Profesor");
                 break;
             case 3:
-                lbRole.setText("Profesor");
+                lbRole.setText("Estudiante");
                 break;
             case 4:
                 lbRole.setText("Estudiante");

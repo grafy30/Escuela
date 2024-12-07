@@ -1,5 +1,6 @@
 package aplicativo.application.form.other;
 
+import AdminEscuela.Conexion.UserSession;
 import AdminEscuela.Dao.CEstudianteDAO;
 import AdminEscuela.Dao.CUsuarioDAO;
 import AdminEscuela.Modelo.ModelEstudiante;
@@ -387,8 +388,8 @@ public class FormEstudiante extends javax.swing.JPanel {
             ModelUsuario usuario = new ModelUsuario();
             usuario.setNombreUsuario(txtCodigoUsuarioLogin.getText());
             usuario.setContraseña(new String(txtContraseñaLogin.getText()));
-            usuario.setRolID(4); // Asumamos que el rol para estudiante es 3, ajusta según tu base de datos
-            usuario.setFoto(estudiante.getFoto()); // Usar la misma foto que el estudiante
+            usuario.setRolID(4); // Estudiante
+            usuario.setFoto(estudiante.getFoto()); // Usar la misma foto que el estudiante                      
          
             // Llamar al método de inserción
             CEstudianteDAO objEstu = new CEstudianteDAO();

@@ -233,15 +233,24 @@ public class CEstudianteDAO {
             }
 
             // Actualizar también los datos del usuario si es necesario
-            String sqlUsuario = "UPDATE Usuarios SET Contraseña = ? WHERE NombreUsuario = ?";
+            String sqlUsuario = "UPDATE Usuarios SET Contraseña = ?, Foto = ? WHERE EstudianteID = ?";
             cs=objCon.EstablecerConexion().prepareCall(sqlUsuario);
             cs.setString(1, txtContraseñaLogin.getText());
-            cs.setString(2,txtUsuarioLogin.getText()); // ID del estudiante
+//            cs.setString(2,txtUsuarioLogin.getText()); // ID del estudiante
+            
+             if (!txtFotoRuta.getText().isEmpty()) {
+                FileInputStream fis = new FileInputStream(txtFotoRuta.getText());
+                cs.setBinaryStream(2, fis, (int) new File(txtFotoRuta.getText()).length());
+            } else {
+                cs.setNull(2, java.sql.Types.BLOB);
+            }
+            cs.setInt(3, Integer.parseInt(txtCodEst.getText())); // Usar id estudiante
 
             rowsUpdated = cs.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(null, "¡Datos del usuario modificados exitosamente!");
             }
+
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al modificar el estudiante: " + e.getMessage());
