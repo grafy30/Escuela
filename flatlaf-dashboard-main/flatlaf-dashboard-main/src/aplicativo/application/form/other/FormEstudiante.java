@@ -1,6 +1,5 @@
 package aplicativo.application.form.other;
 
-import AdminEscuela.Conexion.UserSession;
 import AdminEscuela.Dao.CEstudianteDAO;
 import AdminEscuela.Dao.CUsuarioDAO;
 import AdminEscuela.Modelo.ModelEstudiante;
@@ -59,8 +58,6 @@ public class FormEstudiante extends javax.swing.JPanel {
         btnAgregarEst = new javax.swing.JButton();
         btnEditarEst = new javax.swing.JButton();
         btnEliminarEst = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTablaMostrarEstu = new javax.swing.JTable();
         jFechaNa = new com.toedter.calendar.JDateChooser();
         lblTele = new javax.swing.JLabel();
         txtDNIEst = new javax.swing.JTextField();
@@ -83,6 +80,8 @@ public class FormEstudiante extends javax.swing.JPanel {
         lblContraseñaLogin = new javax.swing.JLabel();
         txtCodigoUsuarioLogin = new javax.swing.JTextField();
         txtContraseñaLogin = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTablaMostrarEstu = new javax.swing.JTable();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         jLabel5.setText("CRUD Estudiante");
@@ -116,25 +115,6 @@ public class FormEstudiante extends javax.swing.JPanel {
             }
         });
 
-        JTablaMostrarEstu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        JTablaMostrarEstu.setOpaque(false);
-        JTablaMostrarEstu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTablaMostrarEstuMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(JTablaMostrarEstu);
-
         lblTele.setText("Telefono:");
 
         lblDireccion.setText("Direccion:");
@@ -166,9 +146,9 @@ public class FormEstudiante extends javax.swing.JPanel {
 
         lblDNI.setText("DNI:");
 
-        lblSemestre.setText("Semestre:");
+        lblSemestre.setText("Grado:");
 
-        jComboBoxSemeEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1er Semestre ", "2do Semestre", "3ro Semestre", "4to Semestre", "5to Semestre", "6to Semestre", "7mo Semestre", "8vo Semestre", "9no Semestre", "10mo Semestre" }));
+        jComboBoxSemeEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1ero Primaria", "2do Primaria", "3ro Primaria", "4to Primaria", "5to Primaria", "6to Primaria", "1ero Secundaria", "2do Secundaria", "3ro Secundaria", "4to Secundaria", "5to Secundaria" }));
 
         lblContraseñaLogin.setText("Contraseña:");
 
@@ -239,29 +219,27 @@ public class FormEstudiante extends javax.swing.JPanel {
                                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtCorreoEst, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtFotoRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE))
+                                        .addGap(0, 9, Short.MAX_VALUE)))))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
-                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblCodigoUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
+                                    .addComponent(lblCodigoUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtCodigoUsuarioLogin))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
+                                    .addComponent(lblContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelTransparent1Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(btnAgregarEst)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoUsuarioLogin))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEditarEst)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE))
-                    .addGroup(panelTransparent1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(btnAgregarEst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditarEst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarEst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addComponent(btnEliminarEst)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelTransparent1Layout.setVerticalGroup(
             panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,23 +303,46 @@ public class FormEstudiante extends javax.swing.JPanel {
                     .addComponent(btnAgregarEst)
                     .addComponent(btnEditarEst)
                     .addComponent(btnEliminarEst))
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        JTablaMostrarEstu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        JTablaMostrarEstu.setOpaque(false);
+        JTablaMostrarEstu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTablaMostrarEstuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTablaMostrarEstu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelTransparent1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
             .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -393,17 +394,10 @@ public class FormEstudiante extends javax.swing.JPanel {
          
             // Llamar al método de inserción
             CEstudianteDAO objEstu = new CEstudianteDAO();
-            boolean resultado = objEstu.InsertarEstudianteYUsuario(estudiante, usuario);
-
-            if (resultado) {
-                JOptionPane.showMessageDialog(null, "Estudiante y Usuario agregados exitosamente.");
-                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
-                limpiarcampos();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al agregar Estudiante y Usuario.");
-            }
-        }
-        
+            objEstu.InsertarEstudianteYUsuario(estudiante, usuario);                          
+            objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
+            limpiarcampos();            
+        }        
     }//GEN-LAST:event_btnAgregarEstActionPerformed
 
     private void btnEditarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEstActionPerformed

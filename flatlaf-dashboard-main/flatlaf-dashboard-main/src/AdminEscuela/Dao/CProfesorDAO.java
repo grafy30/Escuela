@@ -78,58 +78,58 @@ public class CProfesorDAO {
         } 
     }    
 
-    public boolean InsertarProfesorYUsuario(ModelProfesor profesor, ModelUsuario usuario) {
-       CConexion objCon = new CConexion();
-        String sqlProfesor = "INSERT INTO Profesores (Nombre, Apellido, FechaNacimiento, Dni, Especialidad, Direccion, Telefono, Email, FechaRegistro, Foto, RutaFot)"
+    public void InsertarProfesorYUsuario(ModelProfesor profesor, ModelUsuario usuario) {
+        CConexion objCon = new CConexion();
+        String sqlProfesor = "INSERT INTO Profesores (Nombre, Apellido, FechaNacimiento, Dni, Especialidad, Direccion, Telefono, Email, FechaRegistro, Foto, RutaFot) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), ?, ?)";
         String sqlUsuario = "INSERT INTO Usuarios (NombreUsuario, Contraseña, RolID, ProfesorID, Foto) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = objCon.EstablecerConexion()) {
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false); // Iniciar la transacción
 
-            // Insertar en Estudiantes
-            try (PreparedStatement pstEst = conn.prepareStatement(sqlProfesor, Statement.RETURN_GENERATED_KEYS)) {
-                pstEst.setString(1, profesor.getNombre());
-                pstEst.setString(2, profesor.getApellido());
-                pstEst.setDate(3, new java.sql.Date(profesor.getFechaNacimiento().getTime()));
-                pstEst.setString(4, profesor.getDni());
-                pstEst.setString(5, profesor.getEspecialidad());
-                pstEst.setString(6, profesor.getDireccion());
-                pstEst.setString(7, profesor.getTelefono());
-                pstEst.setString(8, profesor.getEmail());
-                pstEst.setBytes(9, profesor.getFoto());
-                pstEst.setString(10, profesor.getRutfo());
-                pstEst.executeUpdate();
+            try (PreparedStatement pstProfesor = conn.prepareStatement(sqlProfesor, Statement.RETURN_GENERATED_KEYS)) {
+                // Insertar datos en la tabla Profesores
+                pstProfesor.setString(1, profesor.getNombre());
+                pstProfesor.setString(2, profesor.getApellido());
+                pstProfesor.setDate(3, new java.sql.Date(profesor.getFechaNacimiento().getTime()));
+                pstProfesor.setString(4, profesor.getDni());
+                pstProfesor.setString(5, profesor.getEspecialidad());
+                pstProfesor.setString(6, profesor.getDireccion());
+                pstProfesor.setString(7, profesor.getTelefono());
+                pstProfesor.setString(8, profesor.getEmail());
+                pstProfesor.setBytes(9, profesor.getFoto());
+                pstProfesor.setString(10, profesor.getRutfo());
+                pstProfesor.executeUpdate();
 
-                // Obtener el ID del Estudiante
-                ResultSet rs = pstEst.getGeneratedKeys();
+                // Obtener el ID generado del Profesor
+                ResultSet rs = pstProfesor.getGeneratedKeys();
                 int ProfesorID = 0;
                 if (rs.next()) {
                     ProfesorID = rs.getInt(1);
+                } else {
+                    throw new SQLException("No se pudo obtener el ID generado para el profesor.");
                 }
 
-                // Insertar en Usuarios
-                try (PreparedStatement pstUsu = conn.prepareStatement(sqlUsuario)) {
-                    pstUsu.setString(1, usuario.getNombreUsuario());
-                    pstUsu.setString(2, usuario.getContraseña());
-                    pstUsu.setInt(3, usuario.getRolID());
-                    pstUsu.setInt(4, ProfesorID);
-                    pstUsu.setBytes(5, usuario.getFoto());                    
-                    pstUsu.executeUpdate();
+                // Insertar datos en la tabla Usuarios
+                try (PreparedStatement pstUsuario = conn.prepareStatement(sqlUsuario)) {
+                    pstUsuario.setString(1, usuario.getNombreUsuario());
+                    pstUsuario.setString(2, usuario.getContraseña());
+                    pstUsuario.setInt(3, usuario.getRolID());
+                    pstUsuario.setInt(4, ProfesorID);
+                    pstUsuario.setBytes(5, usuario.getFoto());
+                    pstUsuario.executeUpdate();
                 }
-
                 // Confirmar la transacción
                 conn.commit();
-                return true;
+                JOptionPane.showMessageDialog(null, "Profesor y usuario añadidos correctamente.");
             } catch (SQLException ex) {
+                // Revertir la transacción en caso de error
                 conn.rollback();
-                JOptionPane.showMessageDialog(null, "Error al insertar rofesor y usuario: " + ex.getMessage());
-                return false;
+                JOptionPane.showMessageDialog(null, "Error al insertar profesor y usuario: " + ex.getMessage());
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo conectar: " + e.toString());
-            return false;
+            JOptionPane.showMessageDialog(null, "No se pudo conectar: " + e.getMessage());
         }
     }
 
@@ -277,6 +277,17 @@ public class CProfesorDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar"+e.toString());
         }  
+    }    
+
+    public void SeleccionarAsignProfe(JTable tabla, JTextField txtCodProAsi) {
+        try {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                txtCodProAsi.setText(tabla.getValueAt(fila, 0).toString());                
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al seleccionar el Profesor: " + e.toString());
+        }
     }
-    
 }

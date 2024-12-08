@@ -19,8 +19,7 @@ import javax.swing.JScrollPane;
 import aplicativo.menu.mode.ToolBarAccentColor;
 
 /**
- *
- * @author Raven
+ * @author Wilson
  */
 public class Menu extends JPanel {
 
@@ -28,17 +27,18 @@ public class Menu extends JPanel {
         {"~PRINCIPAL~"},
         {"Menu Principal"},
         {"~ADMINISTRADOR~"},
-        {"Crud Tablas", "Profesor", "Estudiante", "Usuario"},
+        {"Crud Tablas", "Profesor", "Estudiante", "Cursos"},
         {"Chat"},
         {"Calendar"},
-        {"~COMPONENT~"},
-        {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
-        {"Forms", "Basic Elements", "Advanced Elements", "Editors", "Wizard"},
-        {"~OTHER~"},
-        {"Charts", "Apex", "Flot", "Peity", "Sparkline"},
-        {"Icons", "Feather Icons", "Flag Icons", "Mdi Icons"},
-        {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},
-        {"Logout"}
+        {"~ESTUDIANTE~"},
+        {"Opciones", "Matricula", "Cursos", "Consultar Notas","Pagos"},
+        {"~PROFESOR~"},
+        {"Opciones", " Resgistrar Calificaciones", "Ver Lista de Estudiantes", "Gestion de Tareas", "Asistencias"},
+        {"~OTROS~"},
+        {"Opciones", "Estadisticas", "Graficas", "Reportes"},
+        {"Configuracion", "Perfil de Usuario", "Notificaciones"},
+        {"Paginas Especiales", "Pagina en Blanco", "Preguntas Frecuentes"},
+        {"Cerrar Sesion"}
     };
 
     public boolean isMenuFull() {

@@ -132,88 +132,85 @@ public class CEstudianteDAO {
         } 
     }
 
-    public boolean InsertarEstudianteYUsuario(ModelEstudiante estudiante, ModelUsuario usuario) {
-        CConexion objCon = new CConexion();
+    public void InsertarEstudianteYUsuario(ModelEstudiante estudiante, ModelUsuario usuario) {
+        CConexion con = new CConexion();
         String sqlEstudiante = "INSERT INTO Estudiantes (Nombre, Apellido, FechaNacimiento, Dni, Grado, Direccion, Telefono, Email, FechaRegistro, Foto, RutaFot)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), ?, ?)";
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), ?, ?)";
         String sqlUsuario = "INSERT INTO Usuarios (NombreUsuario, Contraseña, RolID, EstudianteID, Foto) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = objCon.EstablecerConexion()) {
-            conn.setAutoCommit(false);
+        try (Connection conn = con.EstablecerConexion()) {
+            conn.setAutoCommit(false); // Inicia la transacción
 
-            // Insertar en Estudiantes
-            try (PreparedStatement pstEst = conn.prepareStatement(sqlEstudiante, Statement.RETURN_GENERATED_KEYS)) {
-                pstEst.setString(1, estudiante.getNombre());
-                pstEst.setString(2, estudiante.getApellido());
-                pstEst.setDate(3, new java.sql.Date(estudiante.getFechaNacimiento().getTime()));
-                pstEst.setString(4, estudiante.getDni());
-                pstEst.setString(5, estudiante.getGrado());
-                pstEst.setString(6, estudiante.getDireccion());
-                pstEst.setString(7, estudiante.getTelefono());
-                pstEst.setString(8, estudiante.getEmail());
-                pstEst.setBytes(9, estudiante.getFoto());
-                pstEst.setString(10, estudiante.getRutfo());
-                pstEst.executeUpdate();
+            try (PreparedStatement cs = conn.prepareStatement(sqlEstudiante, Statement.RETURN_GENERATED_KEYS)) {
+                // Inserta en la tabla Estudiantes
+                cs.setString(1, estudiante.getNombre());
+                cs.setString(2, estudiante.getApellido());
+                cs.setDate(3, new java.sql.Date(estudiante.getFechaNacimiento().getTime()));
+                cs.setString(4, estudiante.getDni());
+                cs.setString(5, estudiante.getGrado());
+                cs.setString(6, estudiante.getDireccion());
+                cs.setString(7, estudiante.getTelefono());
+                cs.setString(8, estudiante.getEmail());
+                cs.setBytes(9, estudiante.getFoto());
+                cs.setString(10, estudiante.getRutfo());
 
-                // Obtener el ID del Estudiante
-                ResultSet rsEst = pstEst.getGeneratedKeys();
-                int estudianteID = 0;
-                if (rsEst.next()) {
-                    estudianteID = rsEst.getInt(1);
+                int rowsAffected = cs.executeUpdate(); // Ejecuta la sentencia
+
+                if (rowsAffected == 0) {
+                    throw new SQLException("Fallo al insertar estudiante, no se generaron filas.");
                 }
 
-                // Insertar en Usuarios
-                try (PreparedStatement pstUsu = conn.prepareStatement(sqlUsuario)) {
-                    pstUsu.setString(1, usuario.getNombreUsuario());
-                    pstUsu.setString(2, usuario.getContraseña());
-                    pstUsu.setInt(3, usuario.getRolID());
-                    pstUsu.setInt(4, estudianteID);
-                    pstUsu.setBytes(5, usuario.getFoto());                    
-                    pstUsu.executeUpdate();
+                // Obtén el ID generado
+                try (ResultSet rs = cs.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        int EstudianteID = rs.getInt(1);
+
+                        // Inserta en la tabla Usuarios
+                        try (PreparedStatement pr = conn.prepareStatement(sqlUsuario)) {
+                            pr.setString(1, usuario.getNombreUsuario());
+                            pr.setString(2, usuario.getContraseña());
+                            pr.setInt(3, usuario.getRolID());
+                            pr.setInt(4, EstudianteID);
+                            pr.setBytes(5, usuario.getFoto());
+                            pr.executeUpdate();
+                        }
+                    } else {
+                        throw new SQLException("No se pudo obtener el ID generado para el estudiante.");
+                    }
                 }
 
-                // Confirmar la transacción
-                conn.commit();
-                return true;
+                conn.commit(); // Confirma la transacción
+                JOptionPane.showMessageDialog(null, "Estudiante y usuario añadidos correctamente.");
             } catch (SQLException ex) {
-                conn.rollback();
-                JOptionPane.showMessageDialog(null, "Error al insertar estudiante y usuario: " + ex.getMessage());
-                return false;
+                conn.rollback(); // Revierte la transacción si ocurre un error
+                JOptionPane.showMessageDialog(null, "Error al insertar datos: " + ex.getMessage());
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo conectar: " + e.toString());
-            return false;
-        }
+            JOptionPane.showMessageDialog(null, "Error de conexión: " + e.getMessage());
+        }        
     }
 
     public void ModificarEstudiante(JTextField txtCodEst, JTextField txtNomEst, JTextField txtApellidosEst, JDateChooser jFechaNa, JTextField txtDNIEst,
             JComboBox<String> jComboBoxSemeEst, JTextField txtDireccionEst, JTextField txtTelefonoEst, JTextField txtCorreoEst, JLabel lblMostrarFoto, 
             JTextField txtFotoRuta, JTextField txtUsuarioLogin, JTextField txtContraseñaLogin) {
-        
-        Connection con = null;
+                
         CallableStatement cs = null;
-        CConexion objCon = new CConexion();
+        CConexion con = new CConexion();
         try {                      
             String sql = "UPDATE Estudiantes SET Nombre = ?, Apellido = ?, FechaNacimiento = ?, Dni = ?, Grado = ?, Direccion = ?, Telefono = ?, Email = ?, Foto = ? " +
                          "WHERE EstudianteID = ?";
-            cs=objCon.EstablecerConexion().prepareCall(sql);
-//            pst = objCon.prepareStatement(sql);
-
+            cs=con.EstablecerConexion().prepareCall(sql);
             cs.setString(1, txtNomEst.getText());
-            cs.setString(2, txtApellidosEst.getText());
-
-            // Convertir la fecha de JDateChooser a un tipo de dato SQL
+            cs.setString(2, txtApellidosEst.getText());           
             java.util.Date fecha = jFechaNa.getDate();
             java.sql.Date fechaSQL = (fecha != null) ? new java.sql.Date(fecha.getTime()) : null;
             cs.setDate(3, fechaSQL);
-
             cs.setString(4, txtDNIEst.getText());
             cs.setString(5, jComboBoxSemeEst.getSelectedItem().toString());
             cs.setString(6, txtDireccionEst.getText());
             cs.setString(7, txtTelefonoEst.getText());
             cs.setString(8, txtCorreoEst.getText());
-
             // Cargar la foto desde el archivo seleccionado, si existe
             if (!txtFotoRuta.getText().isEmpty()) {
                 FileInputStream fis = new FileInputStream(txtFotoRuta.getText());
@@ -221,10 +218,8 @@ public class CEstudianteDAO {
             } else {
                 cs.setNull(9, java.sql.Types.BLOB);
             }
-
-            cs.setInt(10, Integer.parseInt(txtCodEst.getText())); // ID del estudiante
-
-            // Ejecutar la consulta
+            cs.setInt(10, Integer.parseInt(txtCodEst.getText())); 
+            
             int rowsUpdated = cs.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(null, "¡Datos del estudiante modificados exitosamente!");
@@ -234,30 +229,27 @@ public class CEstudianteDAO {
 
             // Actualizar también los datos del usuario si es necesario
             String sqlUsuario = "UPDATE Usuarios SET Contraseña = ?, Foto = ? WHERE EstudianteID = ?";
-            cs=objCon.EstablecerConexion().prepareCall(sqlUsuario);
-            cs.setString(1, txtContraseñaLogin.getText());
-//            cs.setString(2,txtUsuarioLogin.getText()); // ID del estudiante
-            
-             if (!txtFotoRuta.getText().isEmpty()) {
+            cs=con.EstablecerConexion().prepareCall(sqlUsuario);
+            cs.setString(1, txtContraseñaLogin.getText());            
+            if (!txtFotoRuta.getText().isEmpty()) {
                 FileInputStream fis = new FileInputStream(txtFotoRuta.getText());
                 cs.setBinaryStream(2, fis, (int) new File(txtFotoRuta.getText()).length());
             } else {
                 cs.setNull(2, java.sql.Types.BLOB);
             }
             cs.setInt(3, Integer.parseInt(txtCodEst.getText())); // Usar id estudiante
-
+            
             rowsUpdated = cs.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(null, "¡Datos del usuario modificados exitosamente!");
             }
-
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al modificar el estudiante: " + e.getMessage());
         } finally {
             try {
                 if (cs != null) cs.close();
-                if (con != null) con.close();
+                if (con != null) con.CerrarConexion();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
             }

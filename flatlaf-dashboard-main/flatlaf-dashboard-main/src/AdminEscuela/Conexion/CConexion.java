@@ -36,6 +36,16 @@ public class CConexion {
         }
         return conectar;
     }       
+    public void CerrarConexion() {
+        try {
+            if (conectar != null && !conectar.isClosed()) {
+                conectar.close();
+                System.out.println("Conexión cerrada exitosamente.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage());
+        }
+    }
     
     public HashMap<String, ModelUsuario> obtenerUsuarios() {
         HashMap<String, ModelUsuario> usuarios = new HashMap<>();

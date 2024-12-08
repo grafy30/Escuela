@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package aplicativo.application.form.other;
 
 /**
@@ -37,8 +34,6 @@ public class FormPagos extends javax.swing.JFrame {
         btnAgregarEst = new javax.swing.JButton();
         btnEditarEst = new javax.swing.JButton();
         btnEliminarEst = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTablaMostrarEstu = new javax.swing.JTable();
         jFechaNa = new com.toedter.calendar.JDateChooser();
         lblDireccion = new javax.swing.JLabel();
         txtDireccionEst = new javax.swing.JTextField();
@@ -47,6 +42,8 @@ public class FormPagos extends javax.swing.JFrame {
         lblSemestre = new javax.swing.JLabel();
         jComboBoxSemeEst = new javax.swing.JComboBox<>();
         scrollBarCustom1 = new aplicativo.swing.scrollbar.ScrollBarCustom();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTablaMostrarEstu = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,25 +79,6 @@ public class FormPagos extends javax.swing.JFrame {
             }
         });
 
-        JTablaMostrarEstu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        JTablaMostrarEstu.setOpaque(false);
-        JTablaMostrarEstu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JTablaMostrarEstuMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(JTablaMostrarEstu);
-
         lblDireccion.setText("Estado:");
 
         lblApellidos.setText("Monto:");
@@ -116,58 +94,50 @@ public class FormPagos extends javax.swing.JFrame {
             .addGroup(panelTransparent1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelTransparent1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
+                            .addComponent(lblSemestre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxSemeEst, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
+                            .addComponent(lblApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(27, 27, 27)
+                            .addComponent(txtApellidosEst))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
+                            .addComponent(lblFechaNa)
+                            .addGap(18, 18, 18)
+                            .addComponent(jFechaNa, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelTransparent1Layout.createSequentialGroup()
+                        .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelTransparent1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAgregarEst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEditarEst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarEst))
+                            .addGroup(panelTransparent1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(txtDireccionEst)
+                                .addGap(69, 69, 69))))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                         .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
-                                            .addComponent(lblApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtApellidosEst))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTransparent1Layout.createSequentialGroup()
-                                            .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtCodEst, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtNomEst, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                        .addComponent(lblFechaNa)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFechaNa, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE))
-                    .addGroup(panelTransparent1Layout.createSequentialGroup()
-                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblSemestre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxSemeEst, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                        .addComponent(btnAgregarEst)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnEditarEst)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnEliminarEst))
-                                    .addComponent(txtDireccionEst, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(lblNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNomEst, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodEst, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         panelTransparent1Layout.setVerticalGroup(
             panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTransparent1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,152 +160,171 @@ public class FormPagos extends javax.swing.JFrame {
                     .addComponent(lblSemestre)
                     .addComponent(jComboBoxSemeEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDireccion)
                     .addComponent(txtDireccionEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(37, 37, 37)
                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarEst)
                     .addComponent(btnEditarEst)
                     .addComponent(btnEliminarEst))
                 .addGap(30, 30, 30)
                 .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addGap(0, 282, Short.MAX_VALUE))
         );
+
+        JTablaMostrarEstu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        JTablaMostrarEstu.setOpaque(false);
+        JTablaMostrarEstu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTablaMostrarEstuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(JTablaMostrarEstu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 1383, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEstActionPerformed
-        int filaSeleccionada = JTablaMostrarEstu.getSelectedRow();
-
-        if (filaSeleccionada == -1) {
-            // Si no hay fila seleccionada, mostrar mensaje de advertencia
-            JOptionPane.showMessageDialog(
-                this,
-                "Por favor, seleccione un registro de la tabla para eliminar.",
-                "Advertencia",
-                JOptionPane.WARNING_MESSAGE
-            );
-        } else {
-            // Mostrar mensaje de confirmación
-            int confirmacion = JOptionPane.showConfirmDialog(
-                this,
-                "¿Está seguro de que desea eliminar este registro?",
-                "Confirmación de eliminación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE
-            );
-
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                CEstudianteDAO objEstu=new CEstudianteDAO();
-                objEstu.EliminarEstudiante(txtCodigoUsuarioLogin,txtCodEst);
-                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
-                System.out.println("Registro eliminado.");
-            } else {
-                System.out.println("Operación cancelada.");
-                JOptionPane.showMessageDialog(this, "Operación cancelada.");
-            }
-        }
-        limpiarcampos();
+//        int filaSeleccionada = JTablaMostrarEstu.getSelectedRow();
+//
+//        if (filaSeleccionada == -1) {
+//            // Si no hay fila seleccionada, mostrar mensaje de advertencia
+//            JOptionPane.showMessageDialog(
+//                this,
+//                "Por favor, seleccione un registro de la tabla para eliminar.",
+//                "Advertencia",
+//                JOptionPane.WARNING_MESSAGE
+//            );
+//        } else {
+//            // Mostrar mensaje de confirmación
+//            int confirmacion = JOptionPane.showConfirmDialog(
+//                this,
+//                "¿Está seguro de que desea eliminar este registro?",
+//                "Confirmación de eliminación",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.WARNING_MESSAGE
+//            );
+//
+//            if (confirmacion == JOptionPane.YES_OPTION) {
+//                CEstudianteDAO objEstu=new CEstudianteDAO();
+//                objEstu.EliminarEstudiante(txtCodigoUsuarioLogin,txtCodEst);
+//                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
+//                System.out.println("Registro eliminado.");
+//            } else {
+//                System.out.println("Operación cancelada.");
+//                JOptionPane.showMessageDialog(this, "Operación cancelada.");
+//            }
+//        }
+//        limpiarcampos();
     }//GEN-LAST:event_btnEliminarEstActionPerformed
 
     private void btnEditarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEstActionPerformed
-        CEstudianteDAO objEstu=new CEstudianteDAO();
-        objEstu.ModificarEstudiante(txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, jComboBoxSemeEst, txtDireccionEst,
-            txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
-        objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
-        limpiarcampos();
+//        CEstudianteDAO objEstu=new CEstudianteDAO();
+//        objEstu.ModificarEstudiante(txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, jComboBoxSemeEst, txtDireccionEst,
+//            txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
+//        objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
+//        limpiarcampos();
     }//GEN-LAST:event_btnEditarEstActionPerformed
 
     private void btnAgregarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEstActionPerformed
-        if (txtNomEst.getText().isEmpty() || txtApellidosEst.getText().isEmpty() || jFechaNa.getDateFormatString().isEmpty() || txtDNIEst.getText().isEmpty() ||
-            jComboBoxSemeEst.getSelectedItem().toString().isEmpty() || txtDireccionEst.getText().isEmpty() || txtTelefonoEst.getText().isEmpty() || txtCorreoEst.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
-        }else{
-            ModelEstudiante estudiante=new ModelEstudiante();
-            estudiante.setNombre(txtNomEst.getText());
-            estudiante.setApellido(txtApellidosEst.getText());
-            estudiante.setFechaNacimiento(jFechaNa.getDate());
-
-            String dni = txtDNIEst.getText().trim();
-            if (dni.length() == 8 && dni.matches("\\d+")) {
-                estudiante.setDni(dni);
-            } else {
-                JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 dígitos numéricos.");
-                return; // Salir de la función si el DNI es inválido
-            }
-            String email = txtCorreoEst.getText().trim();
-            if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                JOptionPane.showMessageDialog(null, "Por favor, ingrese un correo electrónico válido.");
-                return;
-            }
-            estudiante.setEmail(email);
-            estudiante.setGrado(jComboBoxSemeEst.getSelectedItem().toString());
-            estudiante.setDireccion(txtDireccionEst.getText());
-            estudiante.setTelefono(txtTelefonoEst.getText());
-            estudiante.setEmail(txtCorreoEst.getText());
-
-            try {
-                File ruta=new File(txtFotoRuta.getText());
-                byte[] icono=new byte[(int)ruta.length()];
-                InputStream input= new FileInputStream(ruta);
-                input.read(icono);
-                estudiante.setFoto(icono);
-            } catch (Exception e) {
-                estudiante.setFoto(null);
-            }
-            estudiante.setRutfo(txtFotoRuta.getText());
-
-            // Crear objeto Usuario
-            ModelUsuario usuario = new ModelUsuario();
-            usuario.setNombreUsuario(txtCodigoUsuarioLogin.getText());
-            usuario.setContraseña(new String(txtContraseñaLogin.getText()));
-            usuario.setRolID(4); // Asumamos que el rol para estudiante es 3, ajusta según tu base de datos
-            usuario.setFoto(estudiante.getFoto()); // Usar la misma foto que el estudiante
-
-            // Llamar al método de inserción
-            CEstudianteDAO objEstu = new CEstudianteDAO();
-            boolean resultado = objEstu.InsertarEstudianteYUsuario(estudiante, usuario);
-
-            if (resultado) {
-                JOptionPane.showMessageDialog(null, "Estudiante y Usuario agregados exitosamente.");
-                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
-                limpiarcampos();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al agregar Estudiante y Usuario.");
-            }
-        }
+//        if (txtNomEst.getText().isEmpty() || txtApellidosEst.getText().isEmpty() || jFechaNa.getDateFormatString().isEmpty() || txtDNIEst.getText().isEmpty() ||
+//            jComboBoxSemeEst.getSelectedItem().toString().isEmpty() || txtDireccionEst.getText().isEmpty() || txtTelefonoEst.getText().isEmpty() || txtCorreoEst.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+//        }else{
+//            ModelEstudiante estudiante=new ModelEstudiante();
+//            estudiante.setNombre(txtNomEst.getText());
+//            estudiante.setApellido(txtApellidosEst.getText());
+//            estudiante.setFechaNacimiento(jFechaNa.getDate());
+//
+//            String dni = txtDNIEst.getText().trim();
+//            if (dni.length() == 8 && dni.matches("\\d+")) {
+//                estudiante.setDni(dni);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 dígitos numéricos.");
+//                return; // Salir de la función si el DNI es inválido
+//            }
+//            String email = txtCorreoEst.getText().trim();
+//            if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+//                JOptionPane.showMessageDialog(null, "Por favor, ingrese un correo electrónico válido.");
+//                return;
+//            }
+//            estudiante.setEmail(email);
+//            estudiante.setGrado(jComboBoxSemeEst.getSelectedItem().toString());
+//            estudiante.setDireccion(txtDireccionEst.getText());
+//            estudiante.setTelefono(txtTelefonoEst.getText());
+//            estudiante.setEmail(txtCorreoEst.getText());
+//
+//            try {
+//                File ruta=new File(txtFotoRuta.getText());
+//                byte[] icono=new byte[(int)ruta.length()];
+//                InputStream input= new FileInputStream(ruta);
+//                input.read(icono);
+//                estudiante.setFoto(icono);
+//            } catch (Exception e) {
+//                estudiante.setFoto(null);
+//            }
+//            estudiante.setRutfo(txtFotoRuta.getText());
+//
+//            // Crear objeto Usuario
+//            ModelUsuario usuario = new ModelUsuario();
+//            usuario.setNombreUsuario(txtCodigoUsuarioLogin.getText());
+//            usuario.setContraseña(new String(txtContraseñaLogin.getText()));
+//            usuario.setRolID(4); // Asumamos que el rol para estudiante es 3, ajusta según tu base de datos
+//            usuario.setFoto(estudiante.getFoto()); // Usar la misma foto que el estudiante
+//
+//            // Llamar al método de inserción
+//            CEstudianteDAO objEstu = new CEstudianteDAO();
+//            boolean resultado = objEstu.InsertarEstudianteYUsuario(estudiante, usuario);
+//
+//            if (resultado) {
+//                JOptionPane.showMessageDialog(null, "Estudiante y Usuario agregados exitosamente.");
+//                objEstu.MostrarTablaEstudiante(JTablaMostrarEstu);
+//                limpiarcampos();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error al agregar Estudiante y Usuario.");
+//            }
+//        }
     }//GEN-LAST:event_btnAgregarEstActionPerformed
 
     private void JTablaMostrarEstuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMostrarEstuMouseClicked
-        CEstudianteDAO objEstu=new CEstudianteDAO();
-        objEstu.SeleccionarEstudiante(JTablaMostrarEstu, txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst,
-            jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
+//        CEstudianteDAO objEstu=new CEstudianteDAO();
+//        objEstu.SeleccionarEstudiante(JTablaMostrarEstu, txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst,
+//            jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
     }//GEN-LAST:event_JTablaMostrarEstuMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

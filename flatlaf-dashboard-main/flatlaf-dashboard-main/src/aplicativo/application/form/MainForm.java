@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import aplicativo.application.Application;
+import aplicativo.application.form.other.FormCurso;
 import aplicativo.application.form.other.FormEstudiante;
 //import aplicativo.application.form.other.FormDashboard;
 //import aplicativo.application.form.other.FormInbox;
@@ -82,11 +83,13 @@ public class MainForm extends JLayeredPane {
                 } else if (subIndex == 2) {
                     Application.showForm(new FormEstudiante());
                 } else if (subIndex == 3) {
-                    Application.showForm(new FormUsuario());
+                    Application.showForm(new FormCurso());
                 } else {
                     action.cancel();
                 }
-            } else if (index == 9) {
+            } 
+            
+            else if (index == 9) {
                 Application.logout();
             } else {
                 action.cancel();
