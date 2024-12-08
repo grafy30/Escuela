@@ -381,7 +381,7 @@ public class FormCurso extends javax.swing.JPanel {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -412,13 +412,12 @@ public class FormCurso extends javax.swing.JPanel {
                     .addComponent(panelTransparent2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelTransparent3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelTransparent5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelTransparent4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelTransparent4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelTransparent3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTransparent5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -501,11 +500,44 @@ public class FormCurso extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAsignarCursoActionPerformed
 
     private void btnEditarAsignarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAsignarCActionPerformed
-        // TODO add your handling code here:
+        CAsignarProfeCursoDAO objAsi=new CAsignarProfeCursoDAO();  
+        objAsi.ModificarAsignacion(txtCodAsignar, txtCodProAsi, txtCodCursoAsi);
+        objAsi.MostrarTablaAsignaciones(JTablaMostrarProfesorAsig);
+        limpiarcampos();
     }//GEN-LAST:event_btnEditarAsignarCActionPerformed
 
     private void btnEliminarAsignCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAsignCActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = JTablaMostrarProfesorAsig.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+                // Si no hay fila seleccionada, mostrar mensaje de advertencia
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Por favor, seleccione un registro de la tabla para eliminar.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+            } else {
+                // Mostrar mensaje de confirmación
+                int confirmacion = JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Está seguro de que desea eliminar este registro?",
+                        "Confirmación de eliminación",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                        CAsignarProfeCursoDAO objAsig=new CAsignarProfeCursoDAO();
+                        objAsig.EliminarAsignacion(txtCodAsignar);
+                        objAsig.MostrarTablaAsignaciones(JTablaMostrarProfesorAsig);
+                        System.out.println("Registro eliminado.");
+                    } else {
+                        System.out.println("Operación cancelada.");
+                        JOptionPane.showMessageDialog(this, "Operación cancelada.");
+                    }
+            }
+        limpiarcampos();
     }//GEN-LAST:event_btnEliminarAsignCActionPerformed
 
     private void JTablaMostrarProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMostrarProfesorMouseClicked

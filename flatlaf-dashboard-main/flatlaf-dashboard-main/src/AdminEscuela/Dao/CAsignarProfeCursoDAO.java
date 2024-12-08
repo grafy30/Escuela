@@ -129,4 +129,52 @@ public class CAsignarProfeCursoDAO {
             }
         }
     }    
+
+    public void ModificarAsignacion(JTextField txtCodAsignacion, JTextField txtNomProfesor, JTextField txtNomCurso) {     
+        CConexion con=new CConexion();
+        CallableStatement cs=null;
+        try {                      
+            String sql = "UPDATE ProfesorCurso SET ProfesorID = ?, CursoID = ? " +
+                         "WHERE ProfesorCursoID = ?";
+            cs=con.EstablecerConexion().prepareCall(sql);
+            cs.setInt(1, Integer.parseInt(txtNomProfesor.getText()));
+            cs.setInt(2, Integer.parseInt(txtNomCurso.getText()));         
+            cs.setInt(3, Integer.parseInt(txtCodAsignacion.getText())); // ID del estudiante
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "ASIGNACION MODIFICADA");
+           
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el Asignacion: " + e.getMessage());
+        } finally {
+            try {
+                if (cs != null) cs.close();
+                if (con != null) con.CerrarConexion();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void EliminarAsignacion(JTextField txtCodAsigna) {
+        CConexion con=new CConexion();  
+        CallableStatement cs=null;
+        String sql= "DELETE FROM ProfesorCurso WHERE ProfesorCursoID=? ";                       
+        try {            
+            cs=con.EstablecerConexion().prepareCall(sql);
+            cs.setString(1, txtCodAsigna.getText());
+            cs.executeUpdate();
+            JOptionPane.showMessageDialog(null, "ASIGNACION ELIMINADA");            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar eliminar la asignacion"+e.toString());
+        }  
+        finally {
+            try {
+                if (cs != null) cs.close();
+                if (con != null) con.CerrarConexion();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+    }
 }
