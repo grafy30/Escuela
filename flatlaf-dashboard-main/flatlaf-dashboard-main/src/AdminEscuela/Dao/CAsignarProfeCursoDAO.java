@@ -30,16 +30,13 @@ public class CAsignarProfeCursoDAO {
             int fila = tabla.getSelectedRow();
             if (fila >= 0) {
                 txtCodAsi.setText(tabla.getValueAt(fila, 0).toString());                
-//                txtCodProAsi.setText(tabla.getValueAt(fila, 1).toString());
-//                txtCodCurAsi.setText(tabla.getValueAt(fila, 2).toString());   
                 String nombreProfesor=tabla.getValueAt(fila, 1).toString();
                 String nombreCurso=tabla.getValueAt(fila, 2).toString();
                 int[] ids=ObtenerIdsPorNombres(nombreProfesor,nombreCurso);
                 int profeID=ids[0];
                 int cursoID=ids[1];
                 txtCodProAsi.setText(String.valueOf(profeID));
-                txtCodCurAsi.setText(String.valueOf(cursoID));
-                
+                txtCodCurAsi.setText(String.valueOf(cursoID));                
             }
         }
         catch (Exception e) {

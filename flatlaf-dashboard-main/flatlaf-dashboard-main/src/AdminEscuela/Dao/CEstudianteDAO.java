@@ -64,11 +64,16 @@ public class CEstudianteDAO {
                     ImageIcon icono = new ImageIcon("src/aplicativo/icon/jpg/foto_fondo.jpg");
                     lblMostrarFoto.setIcon(icono);
                 }
-               ruta.setText(tabla.getValueAt(fila, 11).toString());
+                
+                Object RutaFoto = tabla.getValueAt(fila, 11);
+                ruta.setText(RutaFoto != null ? RutaFoto.toString() : "");
 
                  // Datos de la tabla Usuario
-                codUser.setText(tabla.getValueAt(fila, 12).toString());
-                PassUser.setText(tabla.getValueAt(fila, 13).toString());
+                Object nombre = tabla.getValueAt(fila, 12);
+                Object apellido = tabla.getValueAt(fila, 13);
+                codUser.setText(nombre != null ? nombre.toString() : "");
+                PassUser.setText(apellido != null ? apellido.toString() : ""); 
+
             }
         }
         catch (Exception e) {

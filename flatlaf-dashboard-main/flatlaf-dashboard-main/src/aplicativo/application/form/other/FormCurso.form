@@ -23,10 +23,7 @@
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Component id="panelTransparent1" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="panelTransparent4" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="panelTransparent4" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -77,11 +74,6 @@
                                   <Component id="jLabel5" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblDescrip" min="-2" pref="72" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Component id="txtDescrCurso" min="-2" pref="139" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblNombre" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                                       <Component id="lblCodigo" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
@@ -90,6 +82,17 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="txtNomCurso" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                                       <Component id="txtCodCurso" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblDescrip" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="lblGrado" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtDescrCurso" pref="139" max="32767" attributes="0"/>
+                                      <Component id="jComboBoxGrado" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -127,15 +130,20 @@
                       <Component id="lblDescrip" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDescrCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblGrado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxGrado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAgregarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEditarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEliminarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="scrollBarCustom1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,7 +159,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCodigo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CursoID:"/>
+            <Property name="text" type="java.lang.String" value="Nro:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodCurso">
@@ -198,6 +206,34 @@
         <Component class="javax.swing.JTextField" name="txtDescrCurso">
         </Component>
         <Component class="aplicativo.swing.scrollbar.ScrollBarCustom" name="scrollBarCustom1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblGrado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Grado:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxGrado">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="12">
+                <StringItem index="0" value="Seleccionar"/>
+                <StringItem index="1" value="1ero Primaria"/>
+                <StringItem index="2" value="2do Primaria"/>
+                <StringItem index="3" value="3ro Primaria"/>
+                <StringItem index="4" value="4to Primaria"/>
+                <StringItem index="5" value="5to Primaria"/>
+                <StringItem index="6" value="6to Primaria"/>
+                <StringItem index="7" value="1ero Secundaria"/>
+                <StringItem index="8" value="2do Secundaria"/>
+                <StringItem index="9" value="3ro Secundaria"/>
+                <StringItem index="10" value="4to Secundaria"/>
+                <StringItem index="11" value="5to Secundaria"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

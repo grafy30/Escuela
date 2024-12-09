@@ -19,12 +19,12 @@ import aplicativo.application.Application;
 import aplicativo.application.form.other.FormCurso;
 import aplicativo.application.form.other.FormEstudiante;
 import aplicativo.application.form.other.FormMatricula;
+import aplicativo.application.form.other.FormPagos;
 //import aplicativo.application.form.other.FormDashboard;
 //import aplicativo.application.form.other.FormInbox;
 import aplicativo.application.form.other.FormPrincipal;
 import aplicativo.application.form.other.FormProfesor;
 //import aplicativo.application.form.other.FormRead;
-import aplicativo.application.form.other.FormUsuario;
 import aplicativo.menu.Menu;
 import aplicativo.menu.MenuAction;
 
@@ -92,9 +92,9 @@ public class MainForm extends JLayeredPane {
             } 
             else if (index == 4) {
                 if (subIndex == 1) {
-                    Application.showForm(new FormProfesor());
+                    Application.showForm(new FormMatricula());
                 } else if (subIndex == 2) {
-                    Application.showForm(new FormEstudiante());
+                    Application.showForm(new FormPagos());
                 } else if (subIndex == 3) {
                     Application.showForm(new FormMatricula());
                 } else {

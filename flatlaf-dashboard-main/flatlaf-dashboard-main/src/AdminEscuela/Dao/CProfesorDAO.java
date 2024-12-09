@@ -245,11 +245,14 @@ public class CProfesorDAO {
                     ImageIcon icono = new ImageIcon("src/aplicativo/icon/jpg/foto_fondo.jpg");
                     lblMostrarFoto.setIcon(icono);
                 }
-               txtFotoRuta.setText(tabla.getValueAt(fila, 11).toString());
+                Object RutaFoto = tabla.getValueAt(fila, 11);
+                txtFotoRuta.setText(RutaFoto != null ? RutaFoto.toString() : "");               
 
                  // Datos de la tabla Usuario
-                txtCodigoUsuarioLogin.setText(tabla.getValueAt(fila, 12).toString());
-                txtContraseñaLogin.setText(tabla.getValueAt(fila, 13).toString());
+                Object nombre = tabla.getValueAt(fila, 12);
+                Object apellido = tabla.getValueAt(fila, 13); 
+                txtCodigoUsuarioLogin.setText(nombre != null ? nombre.toString() : "");
+                txtContraseñaLogin.setText(apellido != null ? apellido.toString() : ""); 
             }
         }
         catch (Exception e) {

@@ -31,7 +31,7 @@ public class Menu extends JPanel {
         {"Chat"},
         {"Calendar"},
         {"~ESTUDIANTE~"},
-        {"Opciones", "Matricula", "Cursos", "Consultar Notas","Pagos"},
+        {"Opciones", "Matricula", "Pagos","Cursos", "Consultar Notas"},
         {"~PROFESOR~"},
         {"Opciones", " Resgistrar Calificaciones", "Ver Lista de Estudiantes", "Gestion de Tareas", "Asistencias"},
         {"~OTROS~"},

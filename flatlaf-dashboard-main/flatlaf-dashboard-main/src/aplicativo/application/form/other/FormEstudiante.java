@@ -445,8 +445,7 @@ public class FormEstudiante extends javax.swing.JPanel {
     private void JTablaMostrarEstuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMostrarEstuMouseClicked
         CEstudianteDAO objEstu=new CEstudianteDAO();        
         objEstu.SeleccionarEstudiante(JTablaMostrarEstu, txtCodEst, txtNomEst, txtApellidosEst, jFechaNa, txtDNIEst, 
-                jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);
-        
+                jComboBoxSemeEst, txtDireccionEst, txtTelefonoEst, txtCorreoEst,lblMostrarFoto,txtFotoRuta,txtCodigoUsuarioLogin,txtContraseñaLogin);        
     }//GEN-LAST:event_JTablaMostrarEstuMouseClicked
 
     private void btnBuscarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFotoActionPerformed

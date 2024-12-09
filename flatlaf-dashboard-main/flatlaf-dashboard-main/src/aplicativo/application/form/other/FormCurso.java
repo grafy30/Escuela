@@ -28,6 +28,7 @@ public class FormCurso extends javax.swing.JPanel {
         txtCodAsignar.setText("");
         txtCodCursoAsi.setText("");
         txtCodProAsi.setText("");
+        jComboBoxGrado.setSelectedIndex(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,6 +48,8 @@ public class FormCurso extends javax.swing.JPanel {
         lblDescrip = new javax.swing.JLabel();
         txtDescrCurso = new javax.swing.JTextField();
         scrollBarCustom1 = new aplicativo.swing.scrollbar.ScrollBarCustom();
+        lblGrado = new javax.swing.JLabel();
+        jComboBoxGrado = new javax.swing.JComboBox<>();
         panelTransparent2 = new aplicativo.swing.PanelTransparent();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTablaMostrarCurso = new javax.swing.JTable();
@@ -75,7 +78,7 @@ public class FormCurso extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         jLabel5.setText("CRUD Cursos");
 
-        lblCodigo.setText("CursoID:");
+        lblCodigo.setText("Nro:");
 
         txtCodCurso.setEnabled(false);
 
@@ -104,6 +107,10 @@ public class FormCurso extends javax.swing.JPanel {
 
         lblDescrip.setText("Descripcion:");
 
+        lblGrado.setText("Grado:");
+
+        jComboBoxGrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1ero Primaria", "2do Primaria", "3ro Primaria", "4to Primaria", "5to Primaria", "6to Primaria", "1ero Secundaria", "2do Secundaria", "3ro Secundaria", "4to Secundaria", "5to Secundaria" }));
+
         javax.swing.GroupLayout panelTransparent1Layout = new javax.swing.GroupLayout(panelTransparent1);
         panelTransparent1.setLayout(panelTransparent1Layout);
         panelTransparent1Layout.setHorizontalGroup(
@@ -118,17 +125,21 @@ public class FormCurso extends javax.swing.JPanel {
                                 .addGap(19, 19, 19)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelTransparent1Layout.createSequentialGroup()
-                                .addComponent(lblDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtDescrCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelTransparent1Layout.createSequentialGroup()
                                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
                                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtNomCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtCodCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelTransparent1Layout.createSequentialGroup()
+                                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDescrCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxGrado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(panelTransparent1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(btnAgregarCurso)
@@ -155,14 +166,18 @@ public class FormCurso extends javax.swing.JPanel {
                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescrip)
                     .addComponent(txtDescrCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGrado)
+                    .addComponent(jComboBoxGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(panelTransparent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarCurso)
                     .addComponent(btnEditarCurso)
                     .addComponent(btnEliminarCurso))
-                .addGap(41, 41, 41)
+                .addGap(12, 12, 12)
                 .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 52, Short.MAX_VALUE))
         );
 
         JTablaMostrarCurso.setModel(new javax.swing.table.DefaultTableModel(
@@ -394,9 +409,7 @@ public class FormCurso extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(panelTransparent1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(panelTransparent4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(panelTransparent4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelTransparent3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -423,7 +436,7 @@ public class FormCurso extends javax.swing.JPanel {
 
     private void JTablaMostrarCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMostrarCursoMouseClicked
         CCursoDAO curso=new CCursoDAO();
-        curso.SeleccionarCurso(JTablaMostrarCurso, txtCodCurso, txtNomCurso, txtDescrCurso);
+        curso.SeleccionarCurso(JTablaMostrarCurso, txtCodCurso, txtNomCurso, txtDescrCurso,jComboBoxGrado);
         CAsignarProfeCursoDAO asig=new CAsignarProfeCursoDAO();
         asig.SeleccionarCurso(JTablaMostrarCurso, txtCodCursoAsi);
     }//GEN-LAST:event_JTablaMostrarCursoMouseClicked
@@ -464,19 +477,20 @@ public class FormCurso extends javax.swing.JPanel {
 
     private void btnEditarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCursoActionPerformed
         CCursoDAO objcurso=new CCursoDAO();
-        objcurso.ModificarCurso(txtCodCurso, txtNomCurso, txtDescrCurso);
+        objcurso.ModificarCurso(txtCodCurso, txtNomCurso, txtDescrCurso,jComboBoxGrado);
         objcurso.MostrarTablaCurso(JTablaMostrarCurso);
         limpiarcampos();
     }//GEN-LAST:event_btnEditarCursoActionPerformed
 
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
-        if (txtNomCurso.getText().isEmpty() || txtDescrCurso.getText().isEmpty()) {
+        if (txtNomCurso.getText().isEmpty() || txtDescrCurso.getText().isEmpty() || jComboBoxGrado.getSelectedItem().toString().isEmpty() ) {
                 JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
             }
         else{
                 ModelCurso curso=new ModelCurso();
                 curso.setNombre(txtNomCurso.getText());
-                curso.setDescripcion(txtDescrCurso.getText());                
+                curso.setDescripcion(txtDescrCurso.getText());    
+                curso.setGrado(jComboBoxGrado.getSelectedItem().toString());
                 CCursoDAO objcurso=new CCursoDAO();               
                 objcurso.InsertarCurso(curso);                                
                 objcurso.MostrarTablaCurso(JTablaMostrarCurso);
@@ -561,6 +575,7 @@ public class FormCurso extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminarAsignC;
     private javax.swing.JButton btnEliminarCurso;
     private AdminEscuela.Vista.componentes.Header header1;
+    private javax.swing.JComboBox<String> jComboBoxGrado;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -573,6 +588,7 @@ public class FormCurso extends javax.swing.JPanel {
     private javax.swing.JLabel lblCodigo1;
     private javax.swing.JLabel lblDescrip;
     private javax.swing.JLabel lblDescrip1;
+    private javax.swing.JLabel lblGrado;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private aplicativo.swing.PanelTransparent panelTransparent1;

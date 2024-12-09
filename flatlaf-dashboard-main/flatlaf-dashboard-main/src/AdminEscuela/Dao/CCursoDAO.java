@@ -5,6 +5,7 @@ import AdminEscuela.Modelo.ModelCurso;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -20,13 +21,13 @@ public class CCursoDAO {
         // Definir las columnas de la tabla
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Descripcion");     
+        modelo.addColumn("Descripcion"); 
+        modelo.addColumn("Grado");         
         tabla.setModel(modelo);
-
         // Consulta SQL corregida
-        String sql = "SELECT CursoID, Nombre, Descripcion "                   
+        String sql = "SELECT CursoID, Nombre, Descripcion, Grado "                   
                    + "FROM Cursos ";                   
-        Object[] datos = new Object[3]; 
+        Object[] datos = new Object[4]; 
 
         try (Connection conn = objCon.EstablecerConexion();
              Statement st = conn.createStatement();
@@ -36,6 +37,7 @@ public class CCursoDAO {
                 datos[0] = rs.getString("CursoID");
                 datos[1] = rs.getString("Nombre");
                 datos[2] = rs.getString("Descripcion");
+                datos[3] = rs.getString("Grado");
                 modelo.addRow(datos);
             }
             tabla.setModel(modelo);
@@ -44,13 +46,20 @@ public class CCursoDAO {
         } 
     }
 
-    public void SeleccionarCurso(JTable tabla, JTextField txtCodCurso, JTextField txtNomCurso, JTextField txtDescrCurso) {
+    public void SeleccionarCurso(JTable tabla, JTextField txtCodCurso, JTextField txtNomCurso, JTextField txtDescrCurso,JComboBox <String> jcombgrado ) {
         try {
             int fila = tabla.getSelectedRow();
             if (fila >= 0) {
                 txtCodCurso.setText(tabla.getValueAt(fila, 0).toString());
                 txtNomCurso.setText(tabla.getValueAt(fila, 1).toString());
                 txtDescrCurso.setText(tabla.getValueAt(fila, 2).toString());                
+//                txtGradoCurso.setText(tabla.getValueAt(fila, 3).toString());                  
+                String grado = (tabla.getValueAt(fila, 3) != null) ? tabla.getValueAt(fila, 3).toString() : "";
+                if (!grado.isEmpty()) {
+                    jcombgrado.setSelectedItem(grado);
+                } else {
+                    jcombgrado.setSelectedIndex(0);
+                }
             }
         }
         catch (Exception e) {
@@ -61,12 +70,13 @@ public class CCursoDAO {
     public void InsertarCurso(ModelCurso curso) {
         CConexion con = new CConexion();
         CallableStatement cs =null;
-        String sql = "INSERT INTO Cursos (Nombre, Descripcion) "
-                + "VALUES (?, ?)";
+        String sql = "INSERT INTO Cursos (Nombre, Descripcion, Grado) "
+                + "VALUES (?, ?, ?)";
         try {
                 cs=con.EstablecerConexion().prepareCall(sql);           
                 cs.setString(1, curso.getNombre());
                 cs.setString(2, curso.getDescripcion());                
+                cs.setString(3, curso.getGrado());                
                 cs.execute();
                 JOptionPane.showMessageDialog(null, "CURSO AÑADIDO");
             } catch (SQLException ex) {      
@@ -85,16 +95,17 @@ public class CCursoDAO {
             }
     }
 
-    public void ModificarCurso(JTextField txtCodCurso, JTextField txtNomCurso, JTextField txtDescrCurso) {
+    public void ModificarCurso(JTextField txtCodCurso, JTextField txtNomCurso, JTextField txtDescrCurso ,JComboBox <String> jComboBoxGrado) {
         CConexion con=new CConexion();
         CallableStatement cs=null;
         try {                      
-            String sql = "UPDATE Cursos SET Nombre = ?, Descripcion = ? " +
+            String sql = "UPDATE Cursos SET Nombre = ?, Descripcion = ? , Grado = ? " +
                          "WHERE CursoID = ?";
             cs=con.EstablecerConexion().prepareCall(sql);
             cs.setString(1, txtNomCurso.getText());
             cs.setString(2, txtDescrCurso.getText());         
-            cs.setInt(3, Integer.parseInt(txtCodCurso.getText())); // ID del estudiante
+            cs.setString(3, jComboBoxGrado.getSelectedItem().toString());                     
+            cs.setInt(4, Integer.parseInt(txtCodCurso.getText())); // ID del estudiante
             cs.execute();
             JOptionPane.showMessageDialog(null, "CURSO MODIFICADO");
            

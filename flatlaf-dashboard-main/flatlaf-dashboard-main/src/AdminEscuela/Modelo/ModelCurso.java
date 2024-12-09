@@ -7,6 +7,7 @@ public class ModelCurso {
     private int CursoID;
     private String Nombre;
     private String Descripcion;
+    private String Grado;
 
     public ModelCurso() {
     }
@@ -35,9 +36,18 @@ public class ModelCurso {
         this.Descripcion = Descripcion;
     }
 
-    public ModelCurso(int CursoID, String Nombre, String Descripcion) {
+    public String getGrado() {
+        return Grado;
+    }
+
+    public void setGrado(String Grado) {
+        this.Grado = Grado;
+    }
+    public ModelCurso(int CursoID, String Nombre, String Descripcion, String Grado) {
         this.CursoID = CursoID;
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
-    }            
+        this.Grado = Grado;
+    }
+    
 }
