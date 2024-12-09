@@ -343,8 +343,11 @@ public class FormPagos extends javax.swing.JPanel {
             ModelPago pago=new ModelPago();
             pago.setEstudianteID(Integer.parseInt(txtCodEstudi.getText()));
             
-            DecimalFormat df = new DecimalFormat("#.##");
-            pago.setMonto(Double.parseDouble(df.format(pago.getMonto())));
+            double monto = Double.parseDouble(txtMontoPa.getText());
+            pago.setMonto(monto);
+            //DecimalFormat df = new DecimalFormat("####.00");
+            //pago.setMonto(Double.parseDouble(df.format(pago.getMonto())));
+            
 //            pago.setMonto(Double.parseDouble(txtMontoPa.getText()));
             pago.setCuota(jComboBoxCuota.getSelectedItem().toString());
             pago.setMetodoPago(jComboBoxMetoPa.getSelectedItem().toString());
