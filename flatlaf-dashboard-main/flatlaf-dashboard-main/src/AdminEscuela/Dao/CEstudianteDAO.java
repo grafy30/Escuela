@@ -277,5 +277,16 @@ public class CEstudianteDAO {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar"+e.toString());
         }  
     }
+    
+    public void SeleccionarAsignEstudiante (JTable tabla, JTextField txtCodEst) {
+        try {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0){
+                txtCodEst.setText(tabla.getValueAt(fila, 0).toString());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al seleccionar el estudiante: " + e.toString());
+        }
+    }
 
 }

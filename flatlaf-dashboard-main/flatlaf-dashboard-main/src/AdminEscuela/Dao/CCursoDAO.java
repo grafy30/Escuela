@@ -132,4 +132,15 @@ public class CCursoDAO {
             }
         }
     }
+    
+    public void SeleccionarAsignCurso (JTable tabla, JTextField txtCodCur) {
+        try {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0){
+                txtCodCur.setText(tabla.getValueAt(fila, 0).toString());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al seleccionar el Curso: " + e.toString());
+        }
+    }
 }
