@@ -2,6 +2,7 @@ package AdminEscuela.Dao;
 
 import java.sql.*;
 import AdminEscuela.Conexion.CConexion;
+import AdminEscuela.Conexion.UserSession;
 import AdminEscuela.Modelo.ModelMatricula;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -138,5 +139,63 @@ public class CMatriculaDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al seleccionar la matrícula: " + e.toString());
         }
+    }
+
+    public void MostrarTablaMatriculaAlumno(JTable tabla) {
+        CConexion objCon = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        UserSession user = new UserSession();
+        int usuarioID = user.getUsuarioID();
+        int estudianteID = obtenerEstudianteID(usuarioID); // Llama al método para obtener el EstudianteID
+
+        if (estudianteID == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró un estudiante asociado al usuario logeado.");
+            return;
+        }
+
+        //definimos las columnas de la tabla
+        modelo.addColumn("ID");       
+        modelo.addColumn("Curso");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Estado");
+
+        //consulta sql
+        String sql = "SELECT m.MatriculaID, c.Nombre AS Curso, m.FechaMatricula, m.Estado " +
+                 "FROM Matriculas m " +
+                 "JOIN Estudiantes e ON m.EstudianteID = e.EstudianteID " +
+                 "JOIN Cursos c ON m.CursoID = c.CursoID " +
+                 "WHERE e.EstudianteID = ?";
+
+        try (Connection conn = objCon.EstablecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, estudianteID);
+            ResultSet rs = pst.executeQuery();
+        
+            Object[] datos = new Object[4];
+            while (rs.next()) {
+                datos[0] = rs.getString("MatriculaID");                
+                datos[1] = rs.getString("Curso");
+                datos[2] = rs.getString("FechaMatricula");
+                datos[3] = rs.getString("Estado");
+                modelo.addRow(datos);
+            }
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se conectó correctamente, error: " + e.toString());
+        }
+    }
+    public int obtenerEstudianteID(int usuarioID) {
+        CConexion objCon = new CConexion();
+        String sql = "SELECT EstudianteID FROM Usuarios WHERE UsuarioID = ?";
+        try (Connection conn = objCon.EstablecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, usuarioID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("EstudianteID");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener EstudianteID: " + e.toString());
+        }
+        return -1; // Retorna un valor inválido si no se encuentra el EstudianteID
     }
 }

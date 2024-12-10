@@ -19,6 +19,8 @@ import aplicativo.application.Application;
 import aplicativo.application.form.other.FormCurso;
 import aplicativo.application.form.other.FormEstudiante;
 import aplicativo.application.form.other.FormMatricula;
+import aplicativo.application.form.other.FormMostrarMatricula;
+import aplicativo.application.form.other.FormMostrarPagos;
 import aplicativo.application.form.other.FormPagos;
 //import aplicativo.application.form.other.FormDashboard;
 //import aplicativo.application.form.other.FormInbox;
@@ -30,7 +32,7 @@ import aplicativo.menu.MenuAction;
 
 /**
  *
- * @author Raven
+ * @author Wilson
  */
 public class MainForm extends JLayeredPane {
 
@@ -76,10 +78,10 @@ public class MainForm extends JLayeredPane {
     private void initMenuEvent() {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
-            if (index == 0) {
+            if (index == 0) { //Principal
                 Application.showForm(new FormPrincipal());
             } 
-            else if (index == 1) {
+            else if (index == 1) { //Crud
                 if (subIndex == 1) {
                     Application.showForm(new FormProfesor());
                 } else if (subIndex == 2) {
@@ -90,13 +92,27 @@ public class MainForm extends JLayeredPane {
                     action.cancel();
                 }
             } 
-            else if (index == 4) {
+            else if (index == 2) { //Asignar Tareas ADministrativas
                 if (subIndex == 1) {
                     Application.showForm(new FormMatricula());
-                } else if (subIndex == 2) {
+                } 
+                else if (subIndex == 2) {
                     Application.showForm(new FormPagos());
+                } 
+//                else if (subIndex == 3) {
+//                    Application.showForm(new FormCurso());
+//                }
+                else {
+                    action.cancel();
+                }
+            } 
+            else if (index == 4) {  // Estudiante
+                if (subIndex == 1) {
+                    Application.showForm(new FormMostrarMatricula());
+                } else if (subIndex == 2) {
+                    Application.showForm(new FormMostrarPagos());
                 } else if (subIndex == 3) {
-                    Application.showForm(new FormMatricula());
+                    Application.showForm(new FormCurso());
                 } else {
                     action.cancel();
                 }

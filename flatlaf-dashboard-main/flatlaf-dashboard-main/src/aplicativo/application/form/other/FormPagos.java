@@ -2,7 +2,6 @@ package aplicativo.application.form.other;
 import AdminEscuela.Dao.CEstudianteDAO;
 import AdminEscuela.Dao.CPagoDAO;
 import AdminEscuela.Modelo.ModelPago;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**

@@ -28,7 +28,7 @@ public class Menu extends JPanel {
         {"Menu Principal"},
         {"~ADMINISTRADOR~"},
         {"Crud Tablas", "Profesor", "Estudiante", "Cursos"},
-        {"Chat"},
+        {"Asignar","Matricula", "Pagos"},
         {"Calendar"},
         {"~ESTUDIANTE~"},
         {"Opciones", "Matricula", "Pagos","Cursos", "Consultar Notas"},

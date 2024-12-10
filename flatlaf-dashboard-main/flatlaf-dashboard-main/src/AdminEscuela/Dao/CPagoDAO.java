@@ -1,6 +1,7 @@
 package AdminEscuela.Dao;
 
 import AdminEscuela.Conexion.CConexion;
+import AdminEscuela.Conexion.UserSession;
 import AdminEscuela.Modelo.ModelPago;
 import javax.swing.JTable;
 import java.sql.*;
@@ -202,5 +203,67 @@ public class CPagoDAO {
             }
         }
         return estudianteId;
+    }
+
+    public void MostrarTablaPagoAlumno(JTable tabla) {
+        CConexion objCon = new CConexion();
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        // Obtener el UsuarioID del usuario logeado
+        UserSession user = new UserSession();
+        int usuarioID = user.getUsuarioID();
+        int estudianteID = obtenerEstudianteID(usuarioID); // Llama al método para obtener el EstudianteID
+
+        if (estudianteID == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró un estudiante asociado al usuario logeado.");
+            return;
+        }
+
+        // Definir las columnas de la tabla
+        modelo.addColumn("Nro");
+        modelo.addColumn("Cuotas");
+        modelo.addColumn("Monto");
+        modelo.addColumn("Fecha Vencimiento");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Metodo Pago");
+        tabla.setModel(modelo);
+
+        // Consulta SQL para obtener los pagos del estudiante
+        String sql = "SELECT p.PagoID, p.Cuota, p.Monto, p.FechaPago, p.Estado, p.MetodoPago " +
+                     "FROM Pagos p WHERE p.EstudianteID = ?";
+
+        try (Connection conn = objCon.EstablecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, estudianteID);
+            ResultSet rs = pst.executeQuery();
+
+            // Llenar la tabla con los resultados
+            Object[] datos = new Object[6];
+            while (rs.next()) {
+                datos[0] = rs.getInt("PagoID");
+                datos[1] = rs.getString("Cuota");
+                datos[2] = rs.getDouble("Monto");
+                datos[3] = rs.getDate("FechaPago").toString();
+                datos[4] = rs.getString("Estado");
+                datos[5] = rs.getString("MetodoPago");
+                modelo.addRow(datos);
+            }
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los pagos: " + e.toString());
+        }
+    }
+    public int obtenerEstudianteID(int usuarioID) {
+        CConexion objCon = new CConexion();
+        String sql = "SELECT EstudianteID FROM Usuarios WHERE UsuarioID = ?";
+        try (Connection conn = objCon.EstablecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, usuarioID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("EstudianteID");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener EstudianteID: " + e.toString());
+        }
+        return -1; // Retorna un valor inválido si no se encuentra el EstudianteID
     }
 }
